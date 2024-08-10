@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import imageMapping from './../../Components/imageMapping'
-
+import imageMapping from './../../Components/imageMapping';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const getImageSource = (imageName) => {
-  console.log('Requested image:', imageName);
-  return imageMapping[imageName] ;
+  return imageMapping[imageName];
 };
-
 
 const ChatListItem = ({ name, message, date, avatar }) => (
   <TouchableOpacity style={styles.item}>
-        <Image source={getImageSource(avatar)} style={styles.avatar} />
+    <Image source={getImageSource(avatar)} style={styles.avatar} />
     <View style={styles.messageContainer}>
       <View style={styles.messageHeader}>
         <Text style={styles.name}>{name}</Text>
@@ -50,8 +48,10 @@ export default function ChatEditScreen() {
   }
 
   return (
-   
-    <View >
+    <View style={styles.container}>
+      <View>
+        <Text>Chats</Text>
+      </View>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
@@ -65,8 +65,7 @@ export default function ChatEditScreen() {
         )}
         keyExtractor={(item) => item.id.toString()}
       />
-
-<View style={styles.footer}>
+      <View style={styles.footer}>
         <TouchableOpacity style={styles.footerButton}>
           <Text style={styles.footerButtonText}>Archive</Text>
         </TouchableOpacity>
@@ -78,8 +77,6 @@ export default function ChatEditScreen() {
         </TouchableOpacity>
       </View>
     </View>
-  
-    
   );
 }
 
@@ -88,6 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal: 10,
+    paddingBottom: 50, 
   },
   item: {
     flexDirection: 'row',
@@ -140,6 +138,6 @@ const styles = StyleSheet.create({
   },
   footerButtonText: {
     fontSize: 16,
-    color: 'blue',
+    color: Colors.Gray,
   },
 });
