@@ -8,11 +8,13 @@ import CameraScreen from '../../App/Screens/CameraScreen';
 import StatusScreen from './../Screens/StatusSCreen'; 
 import SettingsScreen from './../Screens/SettingsScreen';
 import { StyleSheet } from 'react-native';
+import Colors from '../Utils/Colors';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => (
   <Tab.Navigator
+  initialRouteName="Chats"
     screenOptions={{
       headerShown: false,
       tabBarLabelStyle: styles.tabBarLabel,
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 70,
     borderTopWidth: 1,
-    borderColor: 'gray',
+    borderColor:Colors.Gray,
   },
   tabBarLabel: {
     marginBottom: 10, }

@@ -3,13 +3,15 @@ import React from 'react';
 import { Archive, Dots, EditBtn } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import Chats from '../../Components/Chats';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ChatScreen() {
+  const navigation = useNavigation();
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       
       <View style={styles.header}>
-        <TouchableOpacity style={styles.headerButton}>
+        <TouchableOpacity style={styles.headerButton}onPress={()=>navigation.navigate('chatedit')}>
           <Text style={styles.headerButtonText}>Edit</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Chats</Text>
@@ -41,7 +43,7 @@ export default function ChatScreen() {
         </View>
         </View>
         <Chats/>
-    </ScrollView>
+    </View>
   );
 }
 
