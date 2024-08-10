@@ -27,7 +27,7 @@ export default function LoginScreen() {
   const handleDonePress = () => {
     if (phoneNumber.length === 10) {
       setErrorMessage('');
-      navigation.navigate('chat');
+      navigation.navigate('Chats');
     } else {
       setErrorMessage('Please enter a valid 10-digit phone number.');
     }

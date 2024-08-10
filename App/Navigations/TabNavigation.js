@@ -47,7 +47,7 @@ const TabNavigation = () => (
       }}
     />
     <Tab.Screen
-      name='chat'
+      name='Chats'
       component={ChatScreen}
       options={{
         tabBarIcon: ({ color, size, focused }) => (
