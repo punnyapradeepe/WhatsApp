@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import imageMapping from './imageMapping'
 
-const imageMapping = {
-  'pro1.png': require('./../assets/Images/Oval.png'),
-  // Add other image mappings here if needed
-};
 
 const getImageSource = (imageName) => {
-  return imageMapping[imageName];
+  console.log('Requested image:', imageName);
+  return imageMapping[imageName] ;
 };
+
 
 const ChatListItem = ({ name, message, date, avatar }) => (
   <TouchableOpacity style={styles.item}>
-    <Image source={getImageSource(avatar)} style={styles.avatar} />
+        <Image source={getImageSource(avatar)} style={styles.avatar} />
     <View style={styles.messageContainer}>
       <View style={styles.messageHeader}>
         <Text style={styles.name}>{name}</Text>
