@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View, TextInput, Modal, FlatList, P
 import React, { useState } from 'react';
 import { SideArrow } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/native';
+import Colors from '../Utils/Colors';
 
 const countries = [
   { name: 'United States', code: '+1' },
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: '#3C3C43',
+    borderColor: Colors.Gray,
   },
   row1: {
     flexDirection: 'row',
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderColor: '#3C3C43',
+    borderColor: Colors.Gray,
   },
   rowRight: {
     flexDirection: 'row',

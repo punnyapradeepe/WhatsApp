@@ -15,7 +15,7 @@ const TabNavigation = () => (
   <Tab.Navigator
     screenOptions={{
       headerShown: false,
-      tabBarInactiveTintColor: 'gray',
+      tabBarLabelStyle: styles.tabBarLabel,
       tabBarStyle: styles.tabBar,
     }}
   >
@@ -78,6 +78,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: 'gray',
   },
+  tabBarLabel: {
+    marginBottom: 10, }
+    
 });
 
 export default TabNavigation;
