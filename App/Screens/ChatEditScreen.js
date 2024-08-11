@@ -25,7 +25,7 @@ export default function ChatEditScreen() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = 'http://192.168.1.7:5000/chats';
+    const url = 'http://192.168.55.101:5000/chats';
 
     fetch(url)
       .then(response => response.json())
