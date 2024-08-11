@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { CallBtn } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
-
+import Calls from './../../Components/Calls'
 export default function CallScreen() {
   return (
     <View style={styles.container}>
@@ -16,6 +16,7 @@ export default function CallScreen() {
         </View>
         <CallBtn />
       </View>
+      <Calls/>
     </View>
   );
 }
