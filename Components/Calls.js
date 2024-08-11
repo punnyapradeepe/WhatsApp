@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Iconimg } from '../App/Utils/SvgIcons';
 
 const callHistory = [
   {
@@ -99,7 +100,7 @@ const CallHistoryScreen = () => {
       </View>
       <Text style={styles.date}>{item.date}</Text>
       <TouchableOpacity style={styles.infoButton}>
-        <Ionicons name="ios-information-circle-outline" size={24} color="#007AFF" />
+        <Iconimg/>
       </TouchableOpacity>
     </View>
   );
@@ -134,10 +135,10 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#000', // Default color for the name
+    color: '#000', 
   },
   missedCallName: {
-    color: 'red', // Red color for missed calls
+    color: 'red',
   },
   callType: {
     fontSize: 14,
