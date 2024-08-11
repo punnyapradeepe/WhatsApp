@@ -1,7 +1,8 @@
 export default{
  
   PRIMARY: '#007AFF',
-  Gray:'#ddd'
+  Gray:'#ddd',
+  DarkGray:'#888'
 
 
 }

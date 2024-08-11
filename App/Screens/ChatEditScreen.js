@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import imageMapping from './../../Components/imageMapping';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Colors from './../Utils/Colors';
 
 const getImageSource = (imageName) => {
   return imageMapping[imageName];
@@ -49,9 +49,15 @@ export default function ChatEditScreen() {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Chats</Text>
+      <View style={styles.header}>
+        <Text style={{fontSize:16,color:Colors.PRIMARY,marginTop:20,fontWeight:'bold'}}>Done</Text>
+        <Text style={{fontSize:30,fontWeight:'bold',marginTop:0}}>Chats</Text>
+        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+        <TouchableOpacity style={{color:Colors.DarkGray,fontSize:16}}><Text style={{color:Colors.DarkGray,fontSize:16}}> Broadcast Lists</Text></TouchableOpacity>
+        <TouchableOpacity ><Text style={{color:Colors.DarkGray,fontSize:16}}>New Group</Text></TouchableOpacity>
       </View>
+      </View>
+    
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
@@ -87,6 +93,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingBottom: 50, 
   },
+  header:{
+  paddingHorizontal:15,
+  paddingVertical:10,
+  backgroundColor:'white',
+  borderBottomWidth:1,
+  borderColor:Colors.Gray
+  },
   item: {
     flexDirection: 'row',
     paddingVertical: 10,
@@ -102,6 +115,8 @@ const styles = StyleSheet.create({
   messageContainer: {
     flex: 1,
     justifyContent: 'center',
+    paddingLeft:10,
+    paddingRight:10
   },
   messageHeader: {
     flexDirection: 'row',
@@ -138,6 +153,6 @@ const styles = StyleSheet.create({
   },
   footerButtonText: {
     fontSize: 16,
-    color: Colors.Gray,
+    color: Colors.DarkGray,
   },
 });

@@ -6,6 +6,7 @@ import TabNavigation from './App/Navigations/TabNavigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ChatEditScreen from './App/Screens/ChatEditScreen';
+import EditStatusScreen from './App/Screens/EditStatusScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Chats" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="chatedit" component={ChatEditScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="editStaus" component={EditStatusScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
