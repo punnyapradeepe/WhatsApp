@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import imageMapping from './imageMapping';
 import Colors from '../App/Utils/Colors';
 
 const getImageSource = (imageName) => {
-  console.log('Requested image:', imageName);
   return imageMapping[imageName];
 };
 
-const ChatListItem = ({ name, message, date, avatar, onLongPress }) => (
+const ChatListItem = ({ id, name, message, date, avatar, onPress, onLongPress }) => (
   <TouchableOpacity
     style={styles.item}
+    onPress={onPress}
     onLongPress={onLongPress}
   >
     <Image source={getImageSource(avatar)} style={styles.avatar} />
@@ -25,6 +26,7 @@ const ChatListItem = ({ name, message, date, avatar, onLongPress }) => (
 );
 
 export default function ChatListScreen() {
+  const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,6 +46,14 @@ export default function ChatListScreen() {
         setLoading(false);
       });
   }, []);
+
+  const handlePress = (item) => {
+    navigation.navigate('ChatDetailScreen', {
+      id: item.id,
+      name: item.name,
+      avatar: item.avatar,
+    });
+  };
 
   const handleLongPress = (item) => {
     setSelectedItem(item);
@@ -65,17 +75,18 @@ export default function ChatListScreen() {
         data={data}
         renderItem={({ item }) => (
           <ChatListItem
+            id={item.id}
             name={item.name}
             message={item.message}
             date={item.date}
             avatar={item.avatar}
+            onPress={() => handlePress(item)}
             onLongPress={() => handleLongPress(item)}
           />
         )}
         keyExtractor={(item) => item.id.toString()}
       />
 
-    
       {selectedItem && (
         <Modal
           animationType="slide"
@@ -83,29 +94,28 @@ export default function ChatListScreen() {
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
         >
-         <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <TouchableOpacity style={styles.modalButton}>
-              <Text style={styles.modalText}>Mute</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.modalButton}>
-              <Text style={styles.modalText}>Contact Info</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.modalButton}>
-              <Text style={styles.modalText}>Export Chat</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.modalButton}>
-              <Text style={styles.modalText}>Clear Chat</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.modalButton, styles.deleteButton]}>
-              <Text style={[styles.modalText, styles.deleteText]}>Delete Chat</Text>
-            </TouchableOpacity>
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContainer}>
+              <TouchableOpacity style={styles.modalButton}>
+                <Text style={styles.modalText}>Mute</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.modalButton}>
+                <Text style={styles.modalText}>Contact Info</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.modalButton}>
+                <Text style={styles.modalText}>Export Chat</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.modalButton}>
+                <Text style={styles.modalText}>Clear Chat</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.modalButton, styles.deleteButton]}>
+                <Text style={[styles.modalText, styles.deleteText]}>Delete Chat</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.cancelButton}  onPress={() => setModalVisible(false)}>
+            <TouchableOpacity style={styles.cancelButton} onPress={() => setModalVisible(false)}>
               <Text style={styles.cancelText}>Cancel</Text>
             </TouchableOpacity>
-          
-        </View>
+          </View>
         </Modal>
       )}
     </View>
@@ -151,32 +161,6 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontSize: 14,
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 20,
-    width: '80%',
-    alignItems: 'center',
-  },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  modalButton: {
-    backgroundColor: '#007AFF',
-    padding: 10,
-    borderRadius: 5,
-  },
-  modalButtonText: {
-    color: 'white',
-    fontSize: 16,
-  },
   modalOverlay: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -185,9 +169,9 @@ const styles = StyleSheet.create({
   modalContainer: {
     backgroundColor: 'white',
     padding: 10,
-    borderRadius:20,
-    marginLeft:20,
-    marginRight:20
+    borderRadius: 20,
+    marginLeft: 20,
+    marginRight: 20,
   },
   modalButton: {
     paddingVertical: 15,
@@ -202,7 +186,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     color: Colors.PRIMARY,
-    fontWeight:'500'
+    fontWeight: '500',
   },
   deleteText: {
     color: 'red',
@@ -213,14 +197,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: 'white',
     borderRadius: 10,
-    marginBottom:20,
-    marginLeft:20,
-    marginRight:20
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
   },
   cancelText: {
     fontSize: 18,
     textAlign: 'center',
     color: Colors.PRIMARY,
-    fontWeight:'500'
+    fontWeight: '500',
   },
 });
