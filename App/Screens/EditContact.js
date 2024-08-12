@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
 import Colors from '../Utils/Colors';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
@@ -33,7 +33,6 @@ export default function EditContactScreen() {
     fetchContact();
   }, [id]);
 
-  // Update name whenever Firstname or Lastname changes
   useEffect(() => {
     setContact((prev) => ({
       ...prev,
@@ -64,6 +63,39 @@ export default function EditContactScreen() {
 
   const handleCancel = () => {
     navigation.goBack();
+  };
+
+  const handleDelete = async () => {
+    Alert.alert(
+      "Delete Contact",
+      "Are you sure you want to delete this contact?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Delete",
+          onPress: async () => {
+            try {
+              const response = await fetch(`http://192.168.137.1:5000/chats/${id}`, {
+                method: 'DELETE',
+              });
+              if (response.ok) {
+                alert('Contact deleted successfully!');
+                navigation.goBack();
+              } else {
+                alert('Failed to delete contact.');
+              }
+            } catch (error) {
+              console.error('Error deleting contact:', error);
+              alert('Error deleting contact.');
+            }
+          },
+          style: "destructive"
+        }
+      ]
+    );
   };
 
   return (
@@ -120,7 +152,7 @@ export default function EditContactScreen() {
           <Text style={styles.linkText}>More Fields</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.deleteContainer}>
+        <TouchableOpacity style={styles.deleteContainer} onPress={handleDelete}>
           <Text style={styles.deleteText}>Delete Contact</Text>
         </TouchableOpacity>
       </ScrollView>

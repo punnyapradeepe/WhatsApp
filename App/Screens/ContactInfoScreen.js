@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import imageMapping from './../../Components/imageMapping';
 import Colors from './../Utils/Colors';
 import { CallFill, ChatFill, VideoCallFill, RightArrow, Mute, Media, StarImg, Search, LeftBackArrow } from '../Utils/SvgIcons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 
 export default function ContactInfoScreen() {
   const navigation = useNavigation();
@@ -11,19 +11,23 @@ export default function ContactInfoScreen() {
   const { id } = route.params;
   const [contactInfo, setContactInfo] = useState(null);
 
-  useEffect(() => {
-    const fetchContactInfo = async () => {
-      try {
-        const response = await fetch(`http://192.168.137.1:5000/chats/${id}`);
-        const data = await response.json();
-        setContactInfo(data);
-      } catch (error) {
-        console.error('Error fetching contact info: ', error);
-      }
-    };
+  // Function to fetch contact info
+  const fetchContactInfo = async () => {
+    try {
+      const response = await fetch(`http://192.168.137.1:5000/chats/${id}`);
+      const data = await response.json();
+      setContactInfo(data);
+    } catch (error) {
+      console.error('Error fetching contact info: ', error);
+    }
+  };
 
-    fetchContactInfo();
-  }, [id]);
+  // Fetch contact info when the screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      fetchContactInfo();
+    }, [id])
+  );
 
   if (!contactInfo) {
     return (
@@ -39,7 +43,7 @@ export default function ContactInfoScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-         <LeftBackArrow/>
+          <LeftBackArrow />
         </TouchableOpacity>
         <Text style={styles.name1}>{`${Firstname} ${Lastname}`}</Text>
         <Text style={styles.headerTitle}>Contact Info</Text>
