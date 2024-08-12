@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Modal } from 'react-native';
 import imageMapping from './../../Components/imageMapping';
-import { Back, Call, CameraImg, Sticker, VideoCall, Audio, Add, CameraIcon, CamImg, Gallery, Document, Location, Contact } from '../Utils/SvgIcons';
+import { Back, Call, VideoCall, Audio, Add, CamImg, Sticker, Gallery, Document, Location, Contact } from '../Utils/SvgIcons';
 import Colors from './../Utils/Colors';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ChatDetailScreen({ route }) {
-  const { name, avatar } = route.params;
+  const navigation = useNavigation();
+  const { id, name, avatar } = route.params; 
   const [modalVisible, setModalVisible] = useState(false);
+  const [chatData, setChatData] = useState(null);
+
+  useEffect(() => {
+    
+    const url = `http://192.168.137.1:5000/chats/${id}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(json => {
+        setChatData(json);
+      })
+      .catch(error => {
+        console.error('Error fetching chat data: ', error);
+      });
+  }, [id]);
 
   const openModal = () => {
     setModalVisible(true);
@@ -20,14 +37,19 @@ export default function ChatDetailScreen({ route }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Back />
-        <Image source={imageMapping[avatar]} style={styles.avatar} />
-        <View>
-          <Text style={styles.headerTitle}>{name}</Text>
-          <Text style={{ color: Colors.DarkGray }}>Tap here for contact info</Text>
-        </View>
+        <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => navigation.navigate('contactInfo', { id })}>
+          <Image source={imageMapping[avatar]} style={styles.avatar} />
+          <View>
+            <Text style={styles.headerTitle}>{name}</Text>
+            <Text style={{ color: Colors.DarkGray }}>Tap here for contact info</Text>
+          </View>
+        </TouchableOpacity>
         <VideoCall />
         <Call />
       </View>
+
+    
+
       <View style={styles.footer}>
         <TouchableOpacity onPress={openModal}>
           <Add />
@@ -49,27 +71,34 @@ export default function ChatDetailScreen({ route }) {
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
             <TouchableOpacity style={styles.modalButton}>
-              <View style={{display:'flex',flexDirection:'row'}}>
-                <CamImg/>
-              <Text style={styles.modalText}>Camera</Text>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <CamImg />
+                <Text style={styles.modalText}>Camera</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalButton}>
-            <View style={{display:'flex',flexDirection:'row'}}>
-              <Gallery/>
-              <Text style={styles.modalText}>Photo & Video Library</Text></View>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Gallery />
+                <Text style={styles.modalText}>Photo & Video Library</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalButton}>
-            <View style={{display:'flex',flexDirection:'row'}}><Document/>
-              <Text style={styles.modalText}>Document</Text></View>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Document />
+                <Text style={styles.modalText}>Document</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalButton}>
-            <View style={{display:'flex',flexDirection:'row'}}><Location/>
-              <Text style={styles.modalText}>LOcation</Text></View>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Location />
+                <Text style={styles.modalText}>Location</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalButton}>
-            <View style={{display:'flex',flexDirection:'row'}}><Contact/>
-              <Text style={styles.modalText}>Contact</Text></View>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Contact />
+                <Text style={styles.modalText}>Contact</Text>
+              </View>
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.cancelButton} onPress={closeModal}>
@@ -82,6 +111,7 @@ export default function ChatDetailScreen({ route }) {
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -90,7 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 15,
+    padding: 10,
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
@@ -128,11 +158,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '60%',
-    justifyContent: 'space-between', 
+    justifyContent: 'space-between',
   },
   textInput: {
     flex: 1,
-    marginRight: 10, 
+    marginRight: 10,
   },
   modalOverlay: {
     flex: 1,
@@ -155,7 +185,7 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 18,
     fontWeight: '500',
-    marginLeft:10
+    marginLeft: 10,
   },
   cancelButton: {
     paddingVertical: 15,

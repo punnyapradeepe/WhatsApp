@@ -33,7 +33,7 @@ export default function ChatListScreen() {
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
-    const url = 'http://192.168.55.101:5000/chats';
+    const url = 'http://192.168.137.1:5000/chats';
 
     fetch(url)
       .then(response => response.json())
@@ -49,11 +49,12 @@ export default function ChatListScreen() {
 
   const handlePress = (item) => {
     navigation.navigate('ChatDetailScreen', {
-      id: item.id,
+      id: item.id,  
       name: item.name,
       avatar: item.avatar,
     });
   };
+  
 
   const handleLongPress = (item) => {
     setSelectedItem(item);

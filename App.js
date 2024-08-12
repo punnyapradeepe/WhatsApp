@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ChatEditScreen from './App/Screens/ChatEditScreen';
 import EditStatusScreen from './App/Screens/EditStatusScreen';
 import ChatDetailScreen from './App/Screens/ChatDetailScreen';
+import ContactInfoScreen from './App/Screens/ContactInfoScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,8 @@ export default function App() {
         <Stack.Screen name="chatedit" component={ChatEditScreen} options={{ headerShown: false }} />
         <Stack.Screen name="editStaus" component={EditStatusScreen} options={{ headerShown: false }} />
         <Stack.Screen name="ChatDetailScreen" component={ChatDetailScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="contactInfo" component={ContactInfoScreen} options={{ headerShown: false }} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
