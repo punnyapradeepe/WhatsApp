@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import imageMapping from './../../Components/imageMapping';
 import Colors from './../Utils/Colors';
-import { ChatFill, LeftBackArrow, Media, Mute, RightArrow, Search, StarImg } from '../Utils/SvgIcons';
+import { CallFill, ChatFill, VideoCallFill, RightArrow, Mute, Media, StarImg, Search, LeftBackArrow } from '../Utils/SvgIcons';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function ContactInfoScreen({ route }) {
+export default function ContactInfoScreen() {
+  const navigation = useNavigation();
+  const route = useRoute();
   const { id } = route.params;
   const [contactInfo, setContactInfo] = useState(null);
 
@@ -35,80 +38,81 @@ export default function ContactInfoScreen({ route }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={{ marginLeft: 10 }}>
-          <LeftBackArrow />
-        </View>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+         <LeftBackArrow/>
+        </TouchableOpacity>
         <Text style={styles.name1}>{`${Firstname} ${Lastname}`}</Text>
         <Text style={styles.headerTitle}>Contact Info</Text>
-        <TouchableOpacity style={styles.editButton}>
+        <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('editContact', { id })}>
           <Text style={styles.editText}>Edit</Text>
         </TouchableOpacity>
       </View>
-
-      <Image source={imageMapping[avatar]} style={styles.avatar} />
-      <View style={styles.statusContainer2}>
-        <TouchableOpacity style={styles.messageRow}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <ScrollView>
+        <Image source={imageMapping[avatar]} style={styles.avatar} />
+        <View style={styles.statusContainer2}>
+          <TouchableOpacity style={styles.messageRow}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View>
+                <Text style={styles.name}>{`${Firstname} ${Lastname}`}</Text>
+                <Text style={styles.mobile}>{mobile}</Text>
+              </View>
+            </View>
+            <View style={styles.chatFillWrapper}>
+              <View style={styles.chatFillContainer}>
+                <ChatFill />
+              </View>
+              <View style={styles.chatFillContainer}>
+                <VideoCallFill />
+              </View>
+              <View style={styles.chatFillContainer}>
+                <CallFill />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.messageRow1}>
             <View>
-              <Text style={styles.name}>{`${Firstname} ${Lastname}`}</Text>
-              <Text style={styles.mobile}>{mobile}</Text>
+              <Text style={styles.status}>{status}</Text>
+              <Text style={styles.statusUpdateDate}>{StatusUpdateDate}</Text>
             </View>
-            <View style={{flexDirection:'row',marginLeft:'auto'}}>
-            <View style={styles.chatFillContainer}>
-              <ChatFill />
+            <RightArrow style={styles.rightArrow} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.statusContainer1}>
+          <TouchableOpacity style={styles.messageRow}>
+            <View style={{ marginRight: 10 }}>
+              <Media />
             </View>
-            <View style={styles.chatFillContainer}>
-              <ChatFill />
+            <Text style={styles.messageText}>Media, Links, and Docs</Text>
+            <Text style={{ marginRight: 10, color: Colors.DarkGray }}>12</Text>
+            <RightArrow style={styles.rightArrow} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.messageRow}>
+            <View style={{ marginRight: 20 }}>
+              <StarImg />
             </View>
-            <View style={styles.chatFillContainer}>
-              <ChatFill />
-            </View></View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.messageRow1}>
-          <View style={{ marginRight: 10 }}>
-            <Mute />
-          </View>
-          <Text style={styles.messageText}>Mute</Text>
-          <RightArrow style={styles.rightArrow} />
-        </TouchableOpacity>
-      </View>
-
-      <Text style={styles.status}>{status}</Text>
-      <Text style={styles.statusUpdateDate}>{StatusUpdateDate}</Text>
-
-      <View style={styles.statusContainer1}>
-        <TouchableOpacity style={styles.messageRow}>
-          <View style={{ marginRight: 10 }}>
-            <Media />
-          </View>
-          <Text style={styles.messageText}>Media, Links, and Docs</Text>
-          <RightArrow style={styles.rightArrow} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.messageRow}>
-          <View style={{ marginRight: 20 }}>
-            <StarImg />
-          </View>
-          <Text style={styles.messageText}>Starred Messages</Text>
-          <RightArrow style={styles.rightArrow} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.messageRow1}>
-          <View style={{ marginRight: 10 }}>
-            <Search />
-          </View>
-          <Text style={styles.messageText}>Chat Search</Text>
-          <RightArrow style={styles.rightArrow} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.statusContainer1}>
-        <TouchableOpacity style={styles.messageRow1}>
-          <View style={{ marginRight: 10 }}>
-            <Mute />
-          </View>
-          <Text style={styles.messageText}>Mute</Text>
-          <RightArrow style={styles.rightArrow} />
-        </TouchableOpacity>
-      </View>
+            <Text style={styles.messageText}>Starred Messages</Text>
+            <Text style={{ marginRight: 10, color: Colors.DarkGray }}>None</Text>
+            <RightArrow style={styles.rightArrow} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.messageRow1}>
+            <View style={{ marginRight: 10 }}>
+              <Search />
+            </View>
+            <Text style={styles.messageText}>Chat Search</Text>
+            <RightArrow style={styles.rightArrow} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.statusContainer1}>
+          <TouchableOpacity style={styles.messageRow1}>
+            <View style={{ marginRight: 10 }}>
+              <Mute />
+            </View>
+            <Text style={styles.messageText}>Mute</Text>
+            <Text style={{ marginRight: 10, color: Colors.DarkGray }}>No</Text>
+            <RightArrow style={styles.rightArrow} />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -125,6 +129,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
     marginTop: 30,
+    marginLeft:10,
+    marginRight:10
   },
   headerTitle: {
     fontSize: 18,
@@ -161,15 +167,12 @@ const styles = StyleSheet.create({
   },
   status: {
     fontSize: 16,
-    fontStyle: 'italic',
-    color: 'gray',
+    fontWeight: '400',
     textAlign: 'center',
-    marginBottom: 10,
   },
   statusUpdateDate: {
     fontSize: 14,
     color: 'gray',
-    textAlign: 'center',
   },
   statusContainer1: {
     backgroundColor: '#FFF',
@@ -205,13 +208,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
   },
+  chatFillWrapper: {
+    flexDirection: 'row',
+  },
   chatFillContainer: {
     padding: 10,
     backgroundColor: Colors.Gray,
     borderRadius: 50,
     marginLeft: 10,
-   
-    
   },
   messageText: {
     fontSize: 16,
