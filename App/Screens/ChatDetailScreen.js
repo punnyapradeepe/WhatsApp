@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    marginTop: 30,
+    marginTop: 20,
   },
   avatar: {
     width: 40,
