@@ -1,6 +1,8 @@
 // App/Navigations/TabNavigation.js
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import ChatScreen from './../Screens/ChatScreen';
 import { CallImg, CameraImg, ChatImg, SettingsImg, StatusImg } from '../Utils/SvgIcons';
 import CallScreen from './../Screens/CallScreen';
@@ -9,8 +11,10 @@ import StatusScreen from './../Screens/StatusSCreen';
 import SettingsScreen from './../Screens/SettingsScreen';
 import { StyleSheet } from 'react-native';
 import Colors from '../Utils/Colors';
+import EditProfile from '../Screens/EditProfile';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const TabNavigation = () => (
   <Tab.Navigator
@@ -59,7 +63,7 @@ const TabNavigation = () => (
     />
     <Tab.Screen
       name='Settings'
-      component={SettingsScreen}
+      component={SettingsScreenStack}
       options={{
         tabBarIcon: ({ color, size, focused }) => (
           <SettingsImg width={size} height={size} fill={focused ? 'blue' : 'black'} />
@@ -67,6 +71,12 @@ const TabNavigation = () => (
       }}
     />
   </Tab.Navigator>
+);
+const SettingsScreenStack = () => (
+  <Stack.Navigator initialRouteName="Settings">
+    <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }} />
+    <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
+  </Stack.Navigator>
 );
 
 const styles = StyleSheet.create({

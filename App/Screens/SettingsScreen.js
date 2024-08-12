@@ -14,7 +14,7 @@ const StatusScreen = () => {
       </View>
 
       <ScrollView contentContainerStyle={styles.content}>
-        <TouchableOpacity style={styles.statusContainer}>
+        <TouchableOpacity style={styles.statusContainer} onPress={()=>navigation.navigate('EditProfile')}>
           <Image
             source={require('./../../assets/Images/Oval 2.png')}
             style={styles.profileImage}
