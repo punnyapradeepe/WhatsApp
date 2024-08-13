@@ -19,7 +19,7 @@ export default function StarredMsgScreen() {
       <View style={styles.imageContainer}>
         <Image source={require('./../../assets/Images/starred.png')} style={styles.image} />
       <Text style={{fontSize:18,fontWeight:'bold',color :Colors.DarkGray}}>No Starred Messages</Text>
-      <Text style={{fontSize:16,fontWeight:'bold',color :Colors.DarkGray}}>Tap and hold on any message to star it,so you can</Text>
+      <Text style={{fontSize:16,fontWeight:'bold',color :Colors.DarkGray}}>Tap and hold on any message to star it to</Text>
       <Text style={{fontSize:16,fontWeight:'bold',color :Colors.DarkGray}}> easily find it later</Text>
       </View>
     </View>
