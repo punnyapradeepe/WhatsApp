@@ -1,9 +1,33 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';  // Import ImagePicker
 import { LeftBackArrow } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 
 export default function EditProfile() {
+  const [profileImage, setProfileImage] = useState(require('./../../assets/Images/Oval 2.png')); // Default profile image
+
+  const selectImage = async () => {
+    // Request permission to access media library
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert('Permission to access camera roll is required!');
+      return;
+    }
+
+    const pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!pickerResult.canceled) {
+      setProfileImage({ uri: pickerResult.assets[0].uri });
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -13,13 +37,13 @@ export default function EditProfile() {
       </View>
       <View style={styles.content}>
         <View style={styles.profileSection}>
-          <View style={styles.profileImageContainer}>
+          <TouchableOpacity style={styles.profileImageContainer} onPress={selectImage}>
             <Image
-              source={require('./../../assets/Images/Oval 2.png')}
+              source={profileImage}
               style={styles.profileImage}
             />
             <Text style={styles.editImageText}>Edit</Text>
-          </View>
+          </TouchableOpacity>
           <View style={styles.profileDescription}>
             <Text style={styles.descriptionText}>
               Enter your name and add an optional
@@ -62,16 +86,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.PRIMARY,
     marginLeft: 10,
-    flex: 1, // Ensures the text takes up available space
+    flex: 1, 
   },
   editProfileText: {
     fontSize: 20,
     color: Colors.Black,
     textAlign: 'center',
-    flex: 1, // Centers the text
+    flex: 1,
   },
   content: {
-    padding: 10,
+   
   },
   profileSection: {
     flexDirection: 'row',
@@ -100,6 +124,7 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: Colors.DarkGray,
+    paddingBottom:10
   },
   infoSection: {
     backgroundColor: 'white',

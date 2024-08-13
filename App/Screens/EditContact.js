@@ -12,18 +12,18 @@ export default function EditContactScreen() {
     Lastname: '',
     Country: '',
     mobile: '',
-    name: '',  // Added name to state
+    name: '',  
   });
 
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const response = await fetch(`http://192.168.137.1:5000/chats/${id}`);
+        const response = await fetch(`http://192.168.1.40:5000/chats/${id}`);
         const data = await response.json();
         setContact((prev) => ({
           ...prev,
           ...data,
-          name: `${data.Firstname} ${data.Lastname}`, // Initialize name
+          name: `${data.Firstname} ${data.Lastname}`,
         }));
       } catch (error) {
         console.error('Error fetching contact data:', error);
@@ -42,17 +42,21 @@ export default function EditContactScreen() {
 
   const handleSave = async () => {
     try {
-      const response = await fetch(`http://192.168.137.1:5000/chats/${id}`, {
+      const response = await fetch(`http://192.168.1.40:5000/chats/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(contact),
       });
+  
+      const responseData = await response.json();
+  
       if (response.ok) {
         alert('Contact updated successfully!');
         navigation.goBack();
       } else {
+        console.error('Failed to update contact:', responseData);
         alert('Failed to update contact.');
       }
     } catch (error) {
@@ -60,6 +64,7 @@ export default function EditContactScreen() {
       alert('Error saving contact.');
     }
   };
+  
 
   const handleCancel = () => {
     navigation.goBack();
@@ -78,7 +83,7 @@ export default function EditContactScreen() {
           text: "Delete",
           onPress: async () => {
             try {
-              const response = await fetch(`http://192.168.137.1:5000/chats/${id}`, {
+              const response = await fetch(`http://192.168.1.40:5000/chats/${id}`, {
                 method: 'DELETE',
               });
               if (response.ok) {

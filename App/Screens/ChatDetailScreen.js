@@ -14,7 +14,7 @@ export default function ChatDetailScreen({ route }) {
   const [messages, setMessages] = useState([]);  
 
   useEffect(() => {
-    const url = `http://192.168.137.1:5000/chats/${id}`;
+    const url = `http://192.168.1.40:5000/chats/${id}`;
 
     fetch(url)
       .then(response => response.json())
@@ -45,7 +45,7 @@ export default function ChatDetailScreen({ route }) {
       const newMessage = {
         text: inputText,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Add timestamp
-        date: formatDate(), // Add formatted date
+        date: formatDate(),
       };
       setMessages([...messages, newMessage]); 
       setInputText(''); 
@@ -55,7 +55,7 @@ export default function ChatDetailScreen({ route }) {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
+
       <View style={styles.header}>
         <Back />
         <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => navigation.navigate('contactInfo', { id })}>
@@ -69,9 +69,9 @@ export default function ChatDetailScreen({ route }) {
         <Call />
       </View>
 
-      {/* Background Image */}
+    
       <ImageBackground source={require('./../../assets/Images/Rectangle (2).png')} style={styles.backgroundImage}>
-        {/* Displaying the messages */}
+       
         <View style={styles.messagesContainer}>
           <FlatList
             data={messages}
@@ -93,7 +93,7 @@ export default function ChatDetailScreen({ route }) {
           />
         </View>
 
-        {/* Footer */}
+    
         <View style={styles.footer}>
           <TouchableOpacity onPress={openModal}>
             <Add />
@@ -113,7 +113,7 @@ export default function ChatDetailScreen({ route }) {
         </View>
       </ImageBackground>
 
-      {/* Modal */}
+     
       <Modal
         animationType="slide"
         transparent={true}

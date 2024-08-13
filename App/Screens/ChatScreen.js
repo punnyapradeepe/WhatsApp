@@ -29,19 +29,7 @@ export default function ChatScreen() {
           <Text style={styles.rowButtonText}>New Group</Text>
         </TouchableOpacity>
         </View>
-        <View style={{display:'flex',flexDirection:'row',borderBottomWidth:1,borderColor:Colors.Gray}}>
-
-          <Text></Text>
-          <View style={{marginLeft:'auto',flexDirection:'row'}}>
-         
-          <View style={{backgroundColor:'#C6C6CC',padding:20}}>
-            <View style={{alignItems:'center', alignSelf:'center',marginTop:10}}><Dots/></View><Text style={{color:'white',alignSelf:'center',marginTop:8}}>more</Text></View>
-          
-          <View style={{backgroundColor:'#3E70A3',padding:20}}>
-            <View style={{alignItems:'center'}}><Archive/></View>
-            <Text  style={{color:'white'}}>Archive</Text></View>
-        </View>
-        </View>
+        
         <Chats/>
     </View>
   );

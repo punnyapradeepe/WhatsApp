@@ -1,29 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Swipeable } from 'react-native-gesture-handler';
 import imageMapping from './imageMapping';
 import Colors from '../App/Utils/Colors';
+import { Archive, Dots } from '../App/Utils/SvgIcons';
 
 const getImageSource = (imageName) => {
   return imageMapping[imageName];
 };
 
-const ChatListItem = ({ id, name, message, date, avatar, onPress, onLongPress }) => (
-  <TouchableOpacity
-    style={styles.item}
-    onPress={onPress}
-    onLongPress={onLongPress}
-  >
-    <Image source={getImageSource(avatar)} style={styles.avatar} />
-    <View style={styles.messageContainer}>
-      <View style={styles.messageHeader}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.date}>{date}</Text>
-      </View>
-      <Text style={styles.message}>{message}</Text>
-    </View>
-  </TouchableOpacity>
-);
+const ChatListItem = ({ id, name, message, date, avatar, onPress, onLongPress, onSwipeableWillOpen }) => {
+  const swipeableRef = useRef(null);
+
+  return (
+    <Swipeable
+      ref={swipeableRef}
+      onSwipeableWillOpen={() => {
+        onSwipeableWillOpen(swipeableRef);
+      }}
+      renderRightActions={() => (
+        <View style={styles.rightActions}>
+          <TouchableOpacity style={[styles.actionButton, styles.archiveButton]}>
+            <Dots />
+            <Text style={styles.actionText}>More</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.actionButton, styles.archiveButton]}>
+            <Archive />
+            <Text style={styles.actionText}>Archive</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    >
+      <TouchableOpacity
+        style={styles.item}
+        onPress={onPress}
+        onLongPress={onLongPress}
+      >
+        <Image source={getImageSource(avatar)} style={styles.avatar} />
+        <View style={styles.messageContainer}>
+          <View style={styles.messageHeader}>
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.date}>{date}</Text>
+          </View>
+          <Text style={styles.message}>{message}</Text>
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
+  );
+};
 
 export default function ChatListScreen() {
   const navigation = useNavigation();
@@ -31,9 +56,10 @@ export default function ChatListScreen() {
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [previousSwipeable, setPreviousSwipeable] = useState(null);
 
   useEffect(() => {
-    const url = 'http://192.168.137.1:5000/chats';
+    const url = 'http://192.168.1.40:5000/chats';
 
     fetch(url)
       .then(response => response.json())
@@ -49,17 +75,24 @@ export default function ChatListScreen() {
 
   const handlePress = (item) => {
     navigation.navigate('ChatDetailScreen', {
-      id: item.id,  
+      id: item.id,
       name: item.name,
       avatar: item.avatar,
     });
   };
-  
 
   const handleLongPress = (item) => {
     setSelectedItem(item);
     setModalVisible(true);
   };
+
+ const handleSwipeableWillOpen = (swipeableRef) => {
+  if (previousSwipeable && previousSwipeable !== swipeableRef) {
+    previousSwipeable.current?.close();
+  }
+  setPreviousSwipeable(swipeableRef);
+};
+
 
   if (loading) {
     return (
@@ -83,6 +116,7 @@ export default function ChatListScreen() {
             avatar={item.avatar}
             onPress={() => handlePress(item)}
             onLongPress={() => handleLongPress(item)}
+            onSwipeableWillOpen={handleSwipeableWillOpen}
           />
         )}
         keyExtractor={(item) => item.id.toString()}
@@ -123,6 +157,7 @@ export default function ChatListScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -161,6 +196,26 @@ const styles = StyleSheet.create({
   message: {
     color: 'gray',
     fontSize: 14,
+  },
+  rightActions: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    borderRightWidth: 1,
+    borderColor: 'white'
+  },
+  actionButton: {
+    backgroundColor: '#C6C6CC',
+    width: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 15,
+  },
+  archiveButton: {
+    backgroundColor: '#3E70A3',
+  },
+  actionText: {
+    color: 'white',
+    marginTop: 5,
   },
   modalOverlay: {
     flex: 1,
