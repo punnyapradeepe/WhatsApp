@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
     marginTop: 30,
+    paddingBottom:20
   },
   filterContainer: {
     flexDirection: 'row',
