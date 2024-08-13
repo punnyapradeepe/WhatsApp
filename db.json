@@ -11,7 +11,8 @@
       "Country": "India",
       "mobile": "+91 8086674333",
       "status": "Unknown",
-      "StatusUpdateDate": "March 03,2020"
+      "StatusUpdateDate": "March 03,2020",
+      "msgStatus": "read.png"
     },
     {
       "id": "2",
@@ -24,7 +25,8 @@
       "Country": "New Zealand",
       "mobile": "+1 202 555 0181",
       "status": "Design adds value faster , than it adds cost",
-      "StatusUpdateDate": "Dec 18,2018"
+      "StatusUpdateDate": "Dec 18,2018",
+      "msgStatus": "audio.png"
     },
     {
       "id": "3",
@@ -37,7 +39,8 @@
       "Country": "New Zealand",
       "mobile": "+1 202 555 0181",
       "status": "Design adds value faster , than it adds cost",
-      "StatusUpdateDate": "Dec 18,2018"
+      "StatusUpdateDate": "Dec 18,2018",
+      "msgStatus": "read.png"
     },
     {
       "Firstname": "Martha",
@@ -50,7 +53,8 @@
       "date": "10/28/19",
       "avatar": "pro4.png",
       "status": "Design adds value faster , than it adds cost",
-      "StatusUpdateDate": "Dec 18,2018"
+      "StatusUpdateDate": "Dec 18,2018",
+      "msgStatus": "pic.png"
     },
     {
       "id": "5",
@@ -76,7 +80,8 @@
       "Country": "New Zealand",
       "mobile": "+1 202 555 0181",
       "status": "Design adds value faster , than it adds cost",
-      "StatusUpdateDate": "Dec 18,2018"
+      "StatusUpdateDate": "Dec 18,2018",
+      "msgStatus": "read.png"
     },
     {
       "id": "7",
@@ -89,10 +94,17 @@
       "Country": "India",
       "mobile": "+91 8086674333",
       "status": "Unknown",
-      "StatusUpdateDate": "March 03,2020"
+      "StatusUpdateDate": "March 03,2020",
+      "msgStatus": "read.png"
     }
   ],
-  "archive":{
-
-  }
+  "message": [
+    {
+      "id": "924d",
+      "text": "hhh",
+      "time": "6:19 PM",
+      "date": "Tuesday, August 13",
+      "userId": "YOUR_USER_ID"
+    }
+  ]
 }
