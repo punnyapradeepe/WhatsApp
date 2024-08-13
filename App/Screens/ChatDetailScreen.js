@@ -57,12 +57,13 @@ export default function ChatDetailScreen({ route }) {
     <View style={styles.container}>
 
       <View style={styles.header}>
-        <Back />
-        <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => navigation.navigate('contactInfo', { id })}>
+        <TouchableOpacity onPress={()=>navigation.goBack()}>
+        <Back /></TouchableOpacity>
+        <TouchableOpacity style={{flexDirection: 'row',paddingRight:15,marginleft:0}} onPress={() => navigation.navigate('contactInfo', { id })}>
           <Image source={imageMapping[avatar]} style={styles.avatar} />
           <View>
             <Text style={styles.headerTitle}>{name}</Text>
-            <Text style={{ color: Colors.DarkGray }}>Tap here for contact info</Text>
+            <Text style={{ color: Colors.DarkGray ,paddingLeft:10}}>Tap here for contact info</Text>
           </View>
         </TouchableOpacity>
         <VideoCall />
@@ -180,10 +181,12 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
+    paddingRight:10
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+    paddingLeft:10
   },
   backgroundImage: {
     flex: 1,
