@@ -12,6 +12,10 @@ import SettingsScreen from './../Screens/SettingsScreen';
 import { StyleSheet } from 'react-native';
 import Colors from '../Utils/Colors';
 import EditProfile from '../Screens/EditProfile';
+import AccountScreeen from '../Screens/AccountScreeen';
+import SettingChat from '../Screens/SettingChat';
+import NotificationSettingsScreen from '../Screens/NotificationSettingsScreen';
+import DataAndStorageUsageScreen from '../Screens/DataAndStorageUsageScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -76,6 +80,11 @@ const SettingsScreenStack = () => (
   <Stack.Navigator initialRouteName="Settings">
     <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }} />
     <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
+    <Stack.Screen name="account" component={AccountScreeen} options={{ headerShown: false }} />
+    <Stack.Screen name="whats" component={SettingChat} options={{ headerShown: false }} />
+    <Stack.Screen name="notification" component={NotificationSettingsScreen} options={{ headerShown: false }} />
+    <Stack.Screen name="data" component={DataAndStorageUsageScreen} options={{ headerShown: false }} />
+
   </Stack.Navigator>
 );
 

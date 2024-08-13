@@ -29,7 +29,7 @@ const StatusScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.statusContainer1}>
-          <TouchableOpacity style={styles.messageRow}>
+          <TouchableOpacity style={styles.messageRow} onPress={()=>navigation.navigate('stared')}>
             <View style={{marginRight:10}}><StarImg/></View>
             <Text style={styles.messageText}>Starred Messages</Text>
             <RightArrow style={styles.rightArrow} />
@@ -43,21 +43,21 @@ const StatusScreen = () => {
         </View>
 
         <View style={styles.statusContainer1}>
-          <TouchableOpacity style={styles.messageRow}><View style={{marginRight:10}}><Icon3/></View>
+          <TouchableOpacity style={styles.messageRow} onPress={()=>navigation.navigate('account')}><View style={{marginRight:10}}><Icon3/></View>
             <Text style={styles.messageText}>Account</Text>
             <RightArrow style={styles.rightArrow} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.messageRow}><View style={{marginRight:10}}><Icon4/></View>
+          <TouchableOpacity style={styles.messageRow} onPress={()=> navigation.navigate('whats')}><View style={{marginRight:10}} ><Icon4/></View>
             <Text style={styles.messageText}>Chats</Text>
             <RightArrow style={styles.rightArrow} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.messageRow}><View style={{marginRight:10}}><Icon5/></View>
+          <TouchableOpacity style={styles.messageRow} onPress={()=>navigation.navigate('notification')}><View style={{marginRight:10}}><Icon5/></View>
             <Text style={styles.messageText}>Notifications</Text>
             <RightArrow style={styles.rightArrow} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.row2}>
+          <TouchableOpacity style={styles.row2}  onPress={()=>navigation.navigate('data')}>
           <View style={{marginRight:10}}><Icon6/></View>
             <Text style={styles.messageText}>Data and Storage Usage</Text>
             <RightArrow style={styles.rightArrow} />

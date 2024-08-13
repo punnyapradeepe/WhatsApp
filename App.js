@@ -11,6 +11,8 @@ import ChatDetailScreen from './App/Screens/ChatDetailScreen';
 import ContactInfoScreen from './App/Screens/ContactInfoScreen';
 import EditContact from './App/Screens/EditContact';
 import EditProfile from './App/Screens/EditProfile';
+import StarredMsgScreen from './App/Screens/StarredMsgScreen';
+import AccountScreeen from './App/Screens/AccountScreeen';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +28,11 @@ export default function App() {
         <Stack.Screen name="contactInfo" component={ContactInfoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="editContact" component={EditContact} options={{ headerShown: false }} />
         <Stack.Screen name="EditProfile" component={TabNavigation} options={{ headerShown: false }} />
+        <Stack.Screen name="stared" component={StarredMsgScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="account" component={TabNavigation} options={{ headerShown: false }} />
+        <Stack.Screen name="whats" component={TabNavigation} options={{ headerShown: false }} />
+        <Stack.Screen name="notification" component={TabNavigation} options={{ headerShown: false }} />
+        <Stack.Screen name="data" component={TabNavigation} options={{ headerShown: false }} />
 
 
       </Stack.Navigator>

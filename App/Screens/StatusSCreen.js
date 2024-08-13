@@ -30,12 +30,12 @@ const navigation =useNavigation();
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+     <View style={styles.header}>
         <TouchableOpacity>
           <Text style={styles.headerText}>Privacy</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Status</Text>
-      </View>
+      </View> 
 
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.statusContainer}>
