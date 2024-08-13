@@ -25,8 +25,7 @@ export default function SettingChat() {
     <RightArrow/></View>
     </TouchableOpacity>
 
-    <Text style={{marginTop:5,color:Colors.DarkGray,fontSize:15,marginLeft:10,marginRight:10}}>Automatically save photos and videos you receive to your </Text>
-    <Text style={{marginTop:5,color:Colors.DarkGray,fontSize:15,marginLeft:10,marginRight:10}}>iphone's Camera Roll </Text>
+    <Text style={{marginTop:5,color:Colors.DarkGray,fontSize:15,marginLeft:10,marginRight:10}}>Automatically save photos and videos you receive to your iphone's Camera Roll </Text>
 
     <TouchableOpacity style={styles.statusContainer}>
     <Text style={styles.StatusText}>Chat BackUp</Text>
