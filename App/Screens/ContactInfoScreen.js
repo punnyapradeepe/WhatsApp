@@ -43,7 +43,8 @@ export default function ContactInfoScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <LeftBackArrow />
+          <View style={{marginLeft:10}}>
+          <LeftBackArrow /></View>
         </TouchableOpacity>
         <Text style={styles.name1}>{`${Firstname} ${Lastname}`}</Text>
         <Text style={styles.headerTitle}>Contact Info</Text>

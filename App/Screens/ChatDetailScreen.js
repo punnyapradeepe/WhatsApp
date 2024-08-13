@@ -57,9 +57,10 @@ export default function ChatDetailScreen({ route }) {
     <View style={styles.container}>
 
       <View style={styles.header}>
-        <TouchableOpacity onPress={()=>navigation.goBack()}>
-        <Back /></TouchableOpacity>
-        <TouchableOpacity style={{flexDirection: 'row',paddingRight:15,marginleft:0}} onPress={() => navigation.navigate('contactInfo', { id })}>
+        <TouchableOpacity onPress={()=>navigation.goBack()} >
+          <View style={{marginleft:10}}>
+        <Back /></View></TouchableOpacity>
+        <TouchableOpacity style={{flexDirection: 'row',paddingRight:15,marginleft:'auto'}} onPress={() => navigation.navigate('contactInfo', { id })}>
           <Image source={imageMapping[avatar]} style={styles.avatar} />
           <View>
             <Text style={styles.headerTitle}>{name}</Text>
