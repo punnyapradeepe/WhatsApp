@@ -7,7 +7,7 @@ const imageMapping = {
   'pro6.png': require('./../assets/Images/Oval (6).png'),
   'pro7.png': require('./../assets/Images/Oval (7).png'),
   'read.png': require('./../assets/Images/Shape.png'),
-  'pic.png': require('./../assets/Images/Photo Icon.png'),
+  'pic.png' : require('./../assets/Images/Photo Icon.png'),
   'audio.png': require('./../assets/Images/Voice Record.png'),
 
 };
