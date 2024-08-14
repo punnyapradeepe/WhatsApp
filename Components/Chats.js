@@ -10,7 +10,7 @@ const getImageSource = (imageName) => {
   return imageMapping[imageName];
 };
 
-const ChatListItem = ({ id, name, message, date, avatar, onPress, onLongPress, onSwipeableWillOpen }) => {
+const ChatListItem = ({ id, name, message, date, avatar, msgStatus, onPress, onLongPress, onSwipeableWillOpen }) => {
   const swipeableRef = useRef(null);
 
   return (
@@ -43,7 +43,10 @@ const ChatListItem = ({ id, name, message, date, avatar, onPress, onLongPress, o
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.date}>{date}</Text>
           </View>
-          <Text style={styles.message}>{message}</Text>
+          <View style={styles.messageWithStatusContainer}>
+            <Image source={getImageSource(msgStatus)} style={styles.msgStatus} />
+            <Text style={styles.message}>{message}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     </Swipeable>
@@ -78,6 +81,7 @@ export default function ChatListScreen() {
       id: item.id,
       name: item.name,
       avatar: item.avatar,
+      msgStatus: item.msgStatus
     });
   };
 
@@ -86,13 +90,12 @@ export default function ChatListScreen() {
     setModalVisible(true);
   };
 
- const handleSwipeableWillOpen = (swipeableRef) => {
-  if (previousSwipeable && previousSwipeable !== swipeableRef) {
-    previousSwipeable.current?.close();
-  }
-  setPreviousSwipeable(swipeableRef);
-};
-
+  const handleSwipeableWillOpen = (swipeableRef) => {
+    if (previousSwipeable && previousSwipeable !== swipeableRef) {
+      previousSwipeable.current?.close();
+    }
+    setPreviousSwipeable(swipeableRef);
+  };
 
   if (loading) {
     return (
@@ -114,6 +117,7 @@ export default function ChatListScreen() {
             message={item.message}
             date={item.date}
             avatar={item.avatar}
+            msgStatus={item.msgStatus}
             onPress={() => handlePress(item)}
             onLongPress={() => handleLongPress(item)}
             onSwipeableWillOpen={handleSwipeableWillOpen}
@@ -157,7 +161,6 @@ export default function ChatListScreen() {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -193,6 +196,13 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontSize: 12,
   },
+  messageWithStatusContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  msgStatus: {
+    marginRight: 10,
+  },
   message: {
     color: 'gray',
     fontSize: 14,
@@ -201,7 +211,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     borderRightWidth: 1,
-    borderColor: 'white'
+    borderColor: 'white',
   },
   actionButton: {
     backgroundColor: '#C6C6CC',

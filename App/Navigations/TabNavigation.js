@@ -16,6 +16,7 @@ import AccountScreeen from '../Screens/AccountScreeen';
 import SettingChat from '../Screens/SettingChat';
 import NotificationSettingsScreen from '../Screens/NotificationSettingsScreen';
 import DataAndStorageUsageScreen from '../Screens/DataAndStorageUsageScreen';
+import CallEdit from '../Screens/CallEdit';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -40,7 +41,7 @@ const TabNavigation = () => (
     />
     <Tab.Screen
       name='Calls'
-      component={CallScreen}
+      component={CallScreenStack}
       options={{
         tabBarIcon: ({ color, size, focused }) => (
           <CallImg width={size} height={size} fill={focused ? 'blue' : 'black'} />
@@ -77,7 +78,7 @@ const TabNavigation = () => (
   </Tab.Navigator>
 );
 const SettingsScreenStack = () => (
-  <Stack.Navigator initialRouteName="Settings">
+  <Stack.Navigator initialRouteName="Calls">
     <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }} />
     <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
     <Stack.Screen name="account" component={AccountScreeen} options={{ headerShown: false }} />
@@ -85,6 +86,13 @@ const SettingsScreenStack = () => (
     <Stack.Screen name="notification" component={NotificationSettingsScreen} options={{ headerShown: false }} />
     <Stack.Screen name="data" component={DataAndStorageUsageScreen} options={{ headerShown: false }} />
 
+  </Stack.Navigator>
+);
+const CallScreenStack = () => (
+  <Stack.Navigator initialRouteName="Calls">
+    <Stack.Screen name="Calls" component={CallScreen} options={{ headerShown: false }} />
+    <Stack.Screen name="calledit" component={CallEdit} options={{ headerShown: false }} />
+ 
   </Stack.Navigator>
 );
 

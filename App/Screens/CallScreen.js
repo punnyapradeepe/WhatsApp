@@ -3,12 +3,16 @@ import React from 'react';
 import { CallBtn } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import Calls from './../../Components/Calls';
+import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function CallScreen() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ color: Colors.PRIMARY }}>Edit</Text>
+        <TouchableOpacity onPress={()=> navigation.navigate('calledit')}>
+        <Text style={{ color: Colors.PRIMARY }}>Edit</Text></TouchableOpacity>
         <View style={styles.filterContainer}>
           <View style={[styles.filterItem, styles.leftFilter]}>
             <Text style={styles.leftText}>All</Text>

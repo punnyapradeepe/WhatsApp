@@ -13,6 +13,7 @@ import EditContact from './App/Screens/EditContact';
 import EditProfile from './App/Screens/EditProfile';
 import StarredMsgScreen from './App/Screens/StarredMsgScreen';
 import AccountScreeen from './App/Screens/AccountScreeen';
+import CallEditComp from './Components/CallEditComp';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,8 @@ export default function App() {
         <Stack.Screen name="whats" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="notification" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="data" component={TabNavigation} options={{ headerShown: false }} />
+        <Stack.Screen name="calledit" component={TabNavigation} options={{ headerShown: false }} />
+        <Stack.Screen name="calleditcomp" component={CallEditComp} options={{ headerShown: false }} />
 
 
       </Stack.Navigator>
