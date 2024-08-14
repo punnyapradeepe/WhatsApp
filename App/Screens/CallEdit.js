@@ -78,6 +78,7 @@ const initialCallHistory = [
 export default function CallEdit() {
   const [callHistory, setCallHistory] = useState(initialCallHistory);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [filter, setFilter] = useState('All'); // Add state for filter
 
   const toggleSelect = (id) => {
     setSelectedItems((prevSelected) =>
@@ -133,6 +134,8 @@ export default function CallEdit() {
     </View>
   );
 
+  const filteredData = filter === 'All' ? callHistory : callHistory.filter(item => item.type === 'missed');
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -140,19 +143,25 @@ export default function CallEdit() {
           <Text style={{ color: Colors.PRIMARY }}>Done</Text>
         </TouchableOpacity>
         <View style={styles.filterContainer}>
-          <View style={[styles.filterItem, styles.leftFilter]}>
-            <Text style={styles.leftText}>All</Text>
-          </View>
-          <View style={[styles.filterItem, styles.rightFilter]}>
-            <Text style={styles.rightText}>Missed</Text>
-          </View>
+          <TouchableOpacity
+            style={[styles.filterItem, filter === 'All' ? styles.leftFilter : styles.rightFilter]}
+            onPress={() => setFilter('All')}
+          >
+            <Text style={filter === 'All' ? styles.leftText : styles.rightText}>All</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.filterItem, filter === 'Missed' ? styles.leftFilter : styles.rightFilter]}
+            onPress={() => setFilter('Missed')}
+          >
+            <Text style={filter === 'Missed' ? styles.leftText : styles.rightText}>Missed</Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity onPress={clearAllItems}>
           <Text style={{ color: Colors.PRIMARY }}>Clear</Text>
         </TouchableOpacity>
       </View>
       <FlatList
-        data={callHistory}
+        data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
