@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Switch, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { LeftBackArrow } from '../Utils/SvgIcons';
+import { LeftBackArrow, SideArrow } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 
@@ -41,6 +41,7 @@ const NotificationSettingsScreen = () => {
           <TouchableOpacity style={styles.touchableRow}>
             <Text style={styles.Text}>Sound</Text>
             <Text style={styles.note}>Note</Text>
+            <SideArrow/>
           </TouchableOpacity>
         </View>
 
@@ -63,13 +64,18 @@ const NotificationSettingsScreen = () => {
           <TouchableOpacity style={styles.touchableRow}>
             <Text style={styles.Text}>Sound</Text>
             <Text style={styles.note}>Note</Text>
+            <SideArrow/>
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={styles.section}>
-          <Text style={styles.Text}>In-App Notifications</Text>
-          <Text style={styles.note}>Banners, Sounds, Vibrate</Text>
-        </TouchableOpacity>
+  <View style={styles.row}>
+    <Text style={styles.Text}>In-App Notifications</Text>
+    <SideArrow />
+  </View>
+  <Text style={styles.note}>Banners, Sounds, Vibrate</Text>
+</TouchableOpacity>
+
 
         <View style={styles.section}>
           <View style={{ flexDirection: 'row',
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
   warningText: {
     color: 'gray',
     textAlign: 'center',
-    fontSize: 17,
+    fontSize: 16,
   },
   headerTitle: {
     fontSize: 20,
@@ -164,8 +170,10 @@ fontWeight:'400'
     paddingVertical: 10,
   },
   note: {
-  
-    margintop:5
+  marginLeft:'auto',
+  marginRight:10,
+    margintop:5,
+    color:Colors.DarkGray
   },
   previewText: {
     color: Colors.DarkGray,

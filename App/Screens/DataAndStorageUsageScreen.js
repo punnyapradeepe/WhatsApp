@@ -1,31 +1,47 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet } from 'react-native';
+import Colors from '../Utils/Colors';
+import { LeftBackArrow, RightArrow } from '../Utils/SvgIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const DataAndStorageUsageScreen = () => {
   const [lowDataUsage, setLowDataUsage] = useState(false);
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={()=> navigation.goBack()}>
+        <View style={styles.leftContainer}>
+          <LeftBackArrow />
+          <Text style={styles.settingsText}>Settings</Text>
+        </View></TouchableOpacity>
+        <Text style={styles.titleText}>Data and Storage Usage</Text>
+      </View>
+
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>MEDIA AUTO-DOWNLOAD</Text>
-        <TouchableOpacity style={styles.option}>
+        <TouchableOpacity style={styles.option1}>
           <Text style={styles.optionText}>Photos</Text>
           <Text style={styles.optionDetail}>Wi-Fi and Cellular</Text>
+          <View style={{ marginRight: 10 }}><RightArrow /></View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.option}>
           <Text style={styles.optionText}>Audio</Text>
           <Text style={styles.optionDetail}>Wi-Fi</Text>
+          <View style={{ marginRight: 10 }}><RightArrow /></View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.option}>
           <Text style={styles.optionText}>Videos</Text>
           <Text style={styles.optionDetail}>Wi-Fi</Text>
+          <View style={{ marginRight: 10 }}><RightArrow /></View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.option}>
           <Text style={styles.optionText}>Documents</Text>
           <Text style={styles.optionDetail}>Wi-Fi</Text>
+          <View style={{ marginRight: 10 }}><RightArrow /></View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.resetButton}>
-          <Text style={styles.resetText}>Reset Auto-Download Settings</Text>
+        <TouchableOpacity style={styles.option}>
+          <Text style={styles.optionText1}>Reset Auto-Download Settings</Text>
         </TouchableOpacity>
         <Text style={styles.noteText}>
           Voice Messages are always automatically downloaded for the best communication experience.
@@ -34,7 +50,7 @@ const DataAndStorageUsageScreen = () => {
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>CALL SETTINGS</Text>
-        <View style={styles.option}>
+        <View style={styles.option2}>
           <Text style={styles.optionText}>Low Data Usage</Text>
           <Switch
             value={lowDataUsage}
@@ -48,9 +64,12 @@ const DataAndStorageUsageScreen = () => {
 
       <TouchableOpacity style={styles.option}>
         <Text style={styles.optionText}>Network Usage</Text>
+        <View style={{ marginRight: 10 }}><RightArrow /></View>
       </TouchableOpacity>
+
       <TouchableOpacity style={styles.option}>
         <Text style={styles.optionText}>Storage Usage</Text>
+        <View style={{ marginRight: 10 }}><RightArrow /></View>
       </TouchableOpacity>
     </View>
   );
@@ -60,15 +79,46 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8F8F8',
-    padding: 20,
+  },
+  header: {
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    marginTop: 30,
+    justifyContent: 'space-between',
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  
+  },
+  settingsText: {
+    color: Colors.PRIMARY,
+    marginLeft: 1,
+    fontSize:17
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    textAlign: 'center',
   },
   section: {
-    marginBottom: 20,
+   
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 15,
     color: '#8E8E93',
-    marginBottom: 10,
+    marginTop: 10,
+    paddingHorizontal: 15,
+    marginTop:20,
+    marginBottom:10
+    
   },
   option: {
     flexDirection: 'row',
@@ -76,29 +126,51 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E5EA',
+    borderBottomColor: Colors.Gray,
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+  },
+  option1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: Colors.Gray,
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+  },
+  option2: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: Colors.Gray,
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
   },
   optionText: {
     fontSize: 16,
     color: '#000',
   },
+  optionText1: {
+    fontSize: 16,
+    color: Colors.DarkGray,
+  },
   optionDetail: {
     fontSize: 16,
     color: '#8E8E93',
-  },
-  resetButton: {
-    paddingVertical: 15,
-    marginTop: 10,
-  },
-  resetText: {
-    fontSize: 16,
-    color: '#007AFF',
-    textAlign: 'left',
+    marginLeft: 'auto',
+    marginRight:10
   },
   noteText: {
     fontSize: 12,
     color: '#8E8E93',
     marginTop: 10,
+    paddingHorizontal: 15,
+    marginBottom:10
   },
 });
 

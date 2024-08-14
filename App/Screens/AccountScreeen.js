@@ -9,10 +9,12 @@ export default function AccountScreeen() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={styles.header}><TouchableOpacity style={{marginLeft:5}} onPress={()=>navigation.goBack()}>
-      <LeftBackArrow/></TouchableOpacity>
-       <Text style={{fontSize:16,color:Colors.PRIMARY,marginLeft:5}}>Settings</Text>
-        <Text style={styles.headerTitle}>Account</Text>
+     <View style={styles.header}>
+     <TouchableOpacity style={ styles.backArrow} onPress={() => navigation.goBack()}>
+          <LeftBackArrow />
+        </TouchableOpacity>
+        <Text style={styles.settingsText}>Settings</Text>
+        <Text style={styles.editProfileText}>Account</Text>
       </View>
 
 
@@ -56,39 +58,43 @@ export default function AccountScreeen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: Colors.BackgroundGray,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    backgroundColor: '#FFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#DDD',
-    paddingTop: 40,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    marginTop: 30,
+    position: 'relative',
+    backgroundColor:'white'
   },
-  settingsButton: {
-
+  backArrow: {
+    zIndex: 1, // Ensure this is on top
   },
-  headerText: {
-    color:Colors.PRIMARY,
+  settingsText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    color: Colors.PRIMARY,
+    marginLeft: 1,
   },
-  headerTitle: {
-    flex: 4, 
+  editProfileText: {
     fontSize: 20,
-    fontWeight: 'bold',
-   marginLeft:'25%'
-  
+    color: Colors.Black,
+    position: 'absolute',
+    fontWeight:'bold',
+    left: 0,
+    right: 0,
+    textAlign: 'center',
+    zIndex: 0, 
+  },
+  content: {
+    flex: 1,
   },
   statusContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FFF',
     padding: 10,
-    borderRadius: 10,
     marginTop: 30,
   },
   row2:
@@ -100,7 +106,7 @@ const styles = StyleSheet.create({
   statusContainer1: {
     backgroundColor: '#FFF',
     padding: 10,
-    borderRadius: 10,
+
     marginTop: 30,
     borderTopColor: Colors.Gray,
     borderBottomColor: Colors.Gray,
@@ -143,6 +149,7 @@ const styles = StyleSheet.create({
   },
   messageText: {
     fontSize: 16,
-marginRight:'auto'
+marginRight:'auto',
+
   },
 })

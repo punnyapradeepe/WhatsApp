@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: '10%',
+
   },
   content: {
     paddingHorizontal: 15,

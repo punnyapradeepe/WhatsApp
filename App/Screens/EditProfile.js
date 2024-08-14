@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';  // Import ImagePicker
 import { LeftBackArrow } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
+import { useNavigation } from '@react-navigation/native';
 
 export default function EditProfile() {
   const [profileImage, setProfileImage] = useState(require('./../../assets/Images/Oval 2.png')); // Default profile image
-
+const navigation = useNavigation();
   const selectImage = async () => {
-    // Request permission to access media library
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
@@ -30,8 +30,10 @@ export default function EditProfile() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <LeftBackArrow style={styles.backArrow} />
+     <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backArrowContainer}>
+          <LeftBackArrow style={styles.backArrow} />
+        </TouchableOpacity>
         <Text style={styles.settingsText}>Settings</Text>
         <Text style={styles.editProfileText}>Edit Profile</Text>
       </View>
@@ -52,15 +54,15 @@ export default function EditProfile() {
           </View>
         </View>
         <View style={styles.infoSection}>
-          <Text style={styles.infoText}>Sabohiddin</Text>
+          <TextInput style={styles.infoText}>Sabohiddin</TextInput>
         </View>
-        <Text style={styles.sectionLabel}>PHONE NUMBER</Text>
+        <TextInput style={styles.sectionLabel}>PHONE NUMBER</TextInput>
         <View style={styles.infoSection}>
           <Text style={styles.infoText}>+988346244571</Text>
         </View>
         <Text style={styles.sectionLabel}>ABOUT</Text>
         <View style={styles.infoSection}>
-          <Text style={styles.infoText}>Digital goodies designer - Pixsellz</Text>
+          <TextInput style={styles.infoText}>Digital goodies designer - Pixsellz</TextInput>
         </View>
       </View>
     </View>
@@ -78,24 +80,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
     marginTop: 20,
+    position: 'relative',
   },
   backArrow: {
+    marginLeft: 10,
     marginRight: 10,
+    zIndex: 1, // Ensure this is on top
   },
   settingsText: {
     fontSize: 20,
     color: Colors.PRIMARY,
     marginLeft: 10,
-    flex: 1, 
   },
   editProfileText: {
     fontSize: 20,
     color: Colors.Black,
+    position: 'absolute',
+    fontWeight:'bold',
+    left: 0,
+    right: 0,
     textAlign: 'center',
-    flex: 1,
+    zIndex: 0, // Ensure this is behind the arrow
   },
   content: {
-   
+    flex: 1,
   },
   profileSection: {
     flexDirection: 'row',
@@ -124,7 +132,7 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: Colors.DarkGray,
-    paddingBottom:10
+    paddingBottom: 10,
   },
   infoSection: {
     backgroundColor: 'white',
