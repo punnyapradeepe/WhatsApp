@@ -4,7 +4,76 @@ import Colors from '../Utils/Colors';
 import { CallBtn } from '../Utils/SvgIcons';
 
 const initialCallHistory = [
-  // ... (your initial call history data)
+  {
+    id: '1',
+    name: 'Martin Randolph',
+    type: 'outgoing',
+    date: '10/13/19',
+    avatar: require('./../../assets/Images/Oval.png'),
+  },
+  {
+    id: '2',
+    name: 'Karen Castillo',
+    type: 'outgoing',
+    date: '10/11/19',
+    avatar: require('./../../assets/Images/Oval (2).png'),
+  },
+  {
+    id: '3',
+    name: 'Kieron Dotson',
+    type: 'outgoing',
+    date: '10/8/19',
+    avatar: require('./../../assets/Images/Oval (3).png'),
+  },
+  {
+    id: '4',
+    name: 'Karen Castillo',
+    type: 'missed',
+    date: '9/30/19',
+    avatar: require('./../../assets/Images/Oval (4).png'),
+  },
+  {
+    id: '5',
+    name: 'Zack John',
+    type: 'incoming',
+    date: '9/24/19',
+    avatar: require('./../../assets/Images/Oval (6).png'),
+  },
+  {
+    id: '6',
+    name: 'Martin Randolph',
+    type: 'outgoing',
+    date: '10/13/19',
+    avatar: require('./../../assets/Images/Oval (4).png'),
+  },
+  {
+    id: '7',
+    name: 'Karen Castillo',
+    type: 'outgoing',
+    date: '10/11/19',
+    avatar: require('./../../assets/Images/Oval (2).png'),
+  },
+  {
+    id: '8',
+    name: 'Kieron Dotson',
+    type: 'missed',
+    date: '10/8/19',
+    avatar: require('./../../assets/Images/Oval (3).png'),
+  },
+  {
+    id: '9',
+    name: 'Karen Castillo',
+    type: 'missed',
+    date: '9/30/19',
+    avatar: require('./../../assets/Images/Oval (3).png'),
+  },
+  {
+    id: '10',
+    name: 'Zack John',
+    type: 'incoming',
+    date: '9/24/19',
+    avatar: require('./../../assets/Images/Oval (4).png'),
+  },
 ];
 
 export default function CallScreen() {
@@ -26,16 +95,17 @@ export default function CallScreen() {
       prevCallHistory.filter((item) => !selectedItems.includes(item.id))
     );
     setSelectedItems([]);
-    setIsEditing(false);
   };
 
   const clearAllItems = () => {
     setCallHistory([]);
     setSelectedItems([]);
-    setIsEditing(false);
   };
 
   const toggleEditing = () => {
+    if (isEditing) {
+      deleteSelectedItems();
+    }
     setIsEditing(!isEditing);
     if (!isEditing) {
       setSelectedItems([]);
@@ -96,12 +166,12 @@ export default function CallScreen() {
           </TouchableOpacity>
         </View>
         {isEditing ? (
-          <TouchableOpacity onPress={deleteSelectedItems}>
-            <Text style={{ color: Colors.PRIMARY }}>Delete</Text>
-          </TouchableOpacity>
-        ) : (
           <TouchableOpacity onPress={clearAllItems}>
             <Text style={{ color: Colors.PRIMARY }}>Clear</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity>
+            <CallBtn />
           </TouchableOpacity>
         )}
       </View>
@@ -113,6 +183,7 @@ export default function CallScreen() {
     </View>
   );
 }
+
 
 
 const styles = StyleSheet.create({
