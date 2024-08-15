@@ -62,7 +62,7 @@ export default function ChatListScreen() {
   const [previousSwipeable, setPreviousSwipeable] = useState(null);
 
   useEffect(() => {
-    const url = 'http://192.168.1.40:5000/chats';
+    const url = 'http://192.168.55.101:5000/chats';
 
     fetch(url)
       .then(response => response.json())

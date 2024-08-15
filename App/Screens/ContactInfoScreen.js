@@ -14,7 +14,7 @@ export default function ContactInfoScreen() {
   // Function to fetch contact info
   const fetchContactInfo = async () => {
     try {
-      const response = await fetch(`http://192.168.1.40:5000/chats/${id}`);
+      const response = await fetch(`http://192.168.55.101:5000/chats/${id}`);
       const data = await response.json();
       setContactInfo(data);
     } catch (error) {

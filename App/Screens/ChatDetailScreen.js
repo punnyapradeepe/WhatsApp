@@ -14,7 +14,7 @@ export default function ChatDetailScreen({ route }) {
   const [messages, setMessages] = useState([]);  
 
   useEffect(() => {
-    const url = `http://192.168.1.40:5000/chats/${id}`;
+    const url = `http://192.168.55.101:5000/chats/${id}`;
 
     fetch(url)
       .then(response => response.json())
