@@ -98,9 +98,12 @@ export default function ChatScreen() {
   };
 
   const handleLongPress = (item) => {
-    setSelectedItem(item);
-    setModalVisible(true);
+    if (!isEditMode) {
+      setSelectedItem(item);
+      setModalVisible(true);
+    }
   };
+  
 
   const handleSwipeableWillOpen = (swipeableRef) => {
     if (previousSwipeable && previousSwipeable !== swipeableRef) {
@@ -137,7 +140,7 @@ export default function ChatScreen() {
           <Text style={styles.headerButtonText}>{isEditMode ? 'Cancel' : 'Edit'}</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Chats</Text>
-        <TouchableOpacity style={styles.headerButton}>
+        <TouchableOpacity style={styles.headerButton} onPress={toggleEditMode}>
           <EditBtn />
         </TouchableOpacity>
       </View>
@@ -173,6 +176,20 @@ export default function ChatScreen() {
         keyExtractor={(item) => item.id.toString()}
       />
 
+      {isEditMode && (
+        <View style={styles.footer}>
+          <TouchableOpacity style={styles.footerButton}>
+            <Text style={styles.footerButtonText}>Archive</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.footerButton}>
+            <Text style={styles.footerButtonText}>Read All</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.footerButton}>
+            <Text style={styles.footerButtonText}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
       {selectedItem && (
         <Modal
           animationType="slide"
@@ -204,12 +221,11 @@ export default function ChatScreen() {
           </View>
         </Modal>
       )}
-
-
-      
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -377,5 +393,25 @@ const styles = StyleSheet.create({
   },
   selectionCircleSelected: {
     backgroundColor: '#007AFF',
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#f8f8f8',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ddd',
+  },
+  footerButton: {
+    paddingHorizontal: 20,
+  },
+  footerButtonText: {
+    fontSize: 16,
+    color: Colors.DarkGray,
   },
 });
