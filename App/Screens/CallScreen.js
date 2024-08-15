@@ -1,92 +1,60 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
-import { CallBtn, Iconimg } from '../Utils/SvgIcons';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Colors from '../Utils/Colors';
-import { useNavigation } from '@react-navigation/native';
+import { CallBtn } from '../Utils/SvgIcons';
 
-const callHistory = [
-  {
-    id: '1',
-    name: 'Martin Randolph',
-    type: 'outgoing',
-    date: '10/13/19',
-    avatar: require('./../../assets/Images/Oval.png'),
-  },
-  {
-    id: '2',
-    name: 'Karen Castillo',
-    type: 'outgoing',
-    date: '10/11/19',
-    avatar: require('./../../assets/Images/Oval (2).png'),
-  },
-  {
-    id: '3',
-    name: 'Kieron Dotson',
-    type: 'outgoing',
-    date: '10/8/19',
-    avatar: require('./../../assets/Images/Oval (3).png'),
-  },
-  {
-    id: '4',
-    name: 'Karen Castillo',
-    type: 'missed',
-    date: '9/30/19',
-    avatar: require('./../../assets/Images/Oval (4).png'),
-  },
-  {
-    id: '5',
-    name: 'Zack John',
-    type: 'incoming',
-    date: '9/24/19',
-    avatar: require('./../../assets/Images/Oval (6).png'),
-  },
-  {
-    id: '6',
-    name: 'Martin Randolph',
-    type: 'outgoing',
-    date: '10/13/19',
-    avatar: require('./../../assets/Images/Oval (4).png'),
-  },
-  {
-    id: '7',
-    name: 'Karen Castillo',
-    type: 'outgoing',
-    date: '10/11/19',
-    avatar: require('./../../assets/Images/Oval (2).png'),
-  },
-  {
-    id: '8',
-    name: 'Kieron Dotson',
-    type: 'missed',
-    date: '10/8/19',
-    avatar: require('./../../assets/Images/Oval (3).png'),
-  },
-  {
-    id: '9',
-    name: 'Karen Castillo',
-    type: 'missed',
-    date: '9/30/19',
-    avatar: require('./../../assets/Images/Oval (3).png'),
-  },
-  {
-    id: '10',
-    name: 'Zack John',
-    type: 'incoming',
-    date: '9/24/19',
-    avatar: require('./../../assets/Images/Oval (4).png'),
-  },
+const initialCallHistory = [
+  // ... (your initial call history data)
 ];
 
 export default function CallScreen() {
-  const navigation = useNavigation();
+  const [callHistory, setCallHistory] = useState(initialCallHistory);
+  const [selectedItems, setSelectedItems] = useState([]);
   const [filter, setFilter] = useState('All');
+  const [isEditing, setIsEditing] = useState(false);
 
-  const filteredCalls = callHistory.filter(
-    (item) => filter === 'All' || item.type === 'missed'
-  );
+  const toggleSelect = (id) => {
+    setSelectedItems((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((item) => item !== id)
+        : [...prevSelected, id]
+    );
+  };
+
+  const deleteSelectedItems = () => {
+    setCallHistory((prevCallHistory) =>
+      prevCallHistory.filter((item) => !selectedItems.includes(item.id))
+    );
+    setSelectedItems([]);
+    setIsEditing(false);
+  };
+
+  const clearAllItems = () => {
+    setCallHistory([]);
+    setSelectedItems([]);
+    setIsEditing(false);
+  };
+
+  const toggleEditing = () => {
+    setIsEditing(!isEditing);
+    if (!isEditing) {
+      setSelectedItems([]);
+    }
+  };
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <View style={[styles.itemContainer, selectedItems.includes(item.id) && styles.selectedItem]}>
+      {isEditing && (
+        <TouchableOpacity
+          style={[
+            styles.redCircle,
+            selectedItems.includes(item.id) && styles.selectedCircle,
+          ]}
+          onPress={() => toggleSelect(item.id)}
+        >
+          {selectedItems.includes(item.id) && <View style={styles.horizontalLine} />}
+        </TouchableOpacity>
+      )}
       <Image source={item.avatar} style={styles.avatar} />
       <View style={styles.infoContainer}>
         <Text
@@ -97,66 +65,55 @@ export default function CallScreen() {
         >
           {item.name}
         </Text>
-        <Text
-          style={[
-            styles.callType,
-            item.type === 'missed'
-          ]}
-        >
-          {item.type}
-        </Text>
+        <Text style={styles.callType}>{item.type}</Text>
       </View>
       <Text style={styles.date}>{item.date}</Text>
-      <TouchableOpacity style={styles.infoButton}>
-        <Iconimg />
-      </TouchableOpacity>
     </View>
   );
+
+  const filteredData = filter === 'All' ? callHistory : callHistory.filter(item => item.type === 'missed');
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('calledit')}>
-          <Text style={{ color: Colors.PRIMARY }}>Edit</Text>
+        <TouchableOpacity onPress={toggleEditing}>
+          <Text style={{ color: Colors.PRIMARY }}>
+            {isEditing ? 'Done' : 'Edit'}
+          </Text>
         </TouchableOpacity>
         <View style={styles.filterContainer}>
           <TouchableOpacity
-            style={[
-              styles.filterItem,
-              filter === 'All' ? styles.leftFilter : styles.rightFilter,
-            ]}
+            style={[styles.filterItem, filter === 'All' ? styles.leftFilter : styles.rightFilter]}
             onPress={() => setFilter('All')}
           >
-            <Text
-              style={filter === 'All' ? styles.leftText : styles.rightText}
-            >
-              All
-            </Text>
+            <Text style={filter === 'All' ? styles.leftText : styles.rightText}>All</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[
-              styles.filterItem,
-              filter === 'missed' ? styles.leftFilter : styles.rightFilter,
-            ]}
+            style={[styles.filterItem, filter === 'missed' ? styles.leftFilter : styles.rightFilter]}
             onPress={() => setFilter('missed')}
           >
-            <Text
-              style={filter === 'missed' ? styles.leftText : styles.rightText}
-            >
-              Missed
-            </Text>
+            <Text style={filter === 'missed' ? styles.leftText : styles.rightText}>Missed</Text>
           </TouchableOpacity>
         </View>
-        <CallBtn />
+        {isEditing ? (
+          <TouchableOpacity onPress={deleteSelectedItems}>
+            <Text style={{ color: Colors.PRIMARY }}>Delete</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={clearAllItems}>
+            <Text style={{ color: Colors.PRIMARY }}>Clear</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <FlatList
-        data={filteredCalls}
+        data={filteredData}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
       />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -231,7 +188,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#999',
   },
-  infoButton: {
-    marginLeft: 10,
+  redCircle: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  selectedCircle: {
+    backgroundColor: 'red',
+  },
+  horizontalLine: {
+    width: 10,
+    height: 2,
+    backgroundColor: 'white',
   },
 });

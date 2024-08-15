@@ -103,7 +103,6 @@ export default function ChatScreen() {
       setModalVisible(true);
     }
   };
-  
 
   const handleSwipeableWillOpen = (swipeableRef) => {
     if (previousSwipeable && previousSwipeable !== swipeableRef) {
@@ -114,7 +113,7 @@ export default function ChatScreen() {
 
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
-    if (!isEditMode) setSelectedItems([]); // Reset selection when exiting edit mode
+    if (!isEditMode) setSelectedItems([]);  
   };
 
   const toggleSelection = (id) => {
@@ -123,6 +122,13 @@ export default function ChatScreen() {
     } else {
       setSelectedItems([...selectedItems, id]);
     }
+  };
+
+  const deleteSelectedMessages = () => {
+    const newData = data.filter(item => !selectedItems.includes(item.id));
+    setData(newData);
+    setSelectedItems([]);
+    setIsEditMode(false);
   };
 
   if (loading) {
@@ -178,13 +184,13 @@ export default function ChatScreen() {
 
       {isEditMode && (
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.footerButton}>
+           <TouchableOpacity >
             <Text style={styles.footerButtonText}>Archive</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.footerButton}>
+          <TouchableOpacity>
             <Text style={styles.footerButtonText}>Read All</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.footerButton}>
+          <TouchableOpacity style={styles.footerButton} onPress={deleteSelectedMessages}>
             <Text style={styles.footerButtonText}>Delete</Text>
           </TouchableOpacity>
         </View>
