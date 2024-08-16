@@ -11,7 +11,7 @@ export default function ContactInfoScreen() {
   const { id } = route.params;
   const [contactInfo, setContactInfo] = useState(null);
 
-  // Function to fetch contact info
+
   const fetchContactInfo = async () => {
     try {
       const response = await fetch(`http://192.168.137.1:5000/chats/${id}`);
@@ -22,7 +22,6 @@ export default function ContactInfoScreen() {
     }
   };
 
-  // Fetch contact info when the screen is focused
   useFocusEffect(
     useCallback(() => {
       fetchContactInfo();

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';  // Import ImagePicker
+import * as ImagePicker from 'expo-image-picker';  
 import { LeftBackArrow } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 
 export default function EditProfile() {
   const [profileImage, setProfileImage] = useState(require('./../../assets/Images/Oval 2.png')); 
-const navigation = useNavigation();
+  const navigation = useNavigation();
+
   const selectImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -30,11 +31,15 @@ const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-     <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backArrowContainer}>
-          <LeftBackArrow style={styles.backArrow} />
-        </TouchableOpacity>
-        <Text style={styles.settingsText}>Settings</Text>
+      <View style={styles.header}>
+        <View style={styles.headerLeft}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backArrowContainer}>
+            <LeftBackArrow style={styles.backArrow} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.settingsTextContainer}>
+            <Text style={styles.settingsText}>Settings</Text>
+          </TouchableOpacity>
+        </View>
         <Text style={styles.editProfileText}>Edit Profile</Text>
       </View>
       <View style={styles.content}>
@@ -75,32 +80,40 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BackgroundGray,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 15,
     marginTop: 20,
-    position: 'relative',
+    backgroundColor: '#FFF',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.Gray,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backArrowContainer: {
+    padding: 10,
   },
   backArrow: {
-    marginLeft: 10,
-    marginRight: 10,
-    zIndex: 1, // Ensure this is on top
+    width: 10,
+    height:10,
+  },
+  settingsTextContainer: {
   },
   settingsText: {
-    fontSize: 20,
+    fontSize: 16,
     color: Colors.PRIMARY,
-    marginLeft: 10,
   },
   editProfileText: {
     fontSize: 20,
     color: Colors.Black,
-    position: 'absolute',
-    fontWeight:'bold',
-    left: 0,
-    right: 0,
+    fontWeight: 'bold',
     textAlign: 'center',
-    zIndex: 0, // Ensure this is behind the arrow
+    flex: 1,
+    textAlign: 'center',
   },
   content: {
     flex: 1,
@@ -133,10 +146,6 @@ const styles = StyleSheet.create({
   descriptionText: {
     color: Colors.DarkGray,
     paddingBottom: 5,
-  },
-  descriptionText1: {
-    color: Colors.DarkGray,
-    paddingBottom: 10,
   },
   infoSection: {
     backgroundColor: 'white',

@@ -11,10 +11,9 @@ export default function SettingChat() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backArrowContainer}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <LeftBackArrow style={styles.backArrow} />
         </TouchableOpacity>
-      
         <Text style={styles.editProfileText}>Chats</Text>
       </View>
 

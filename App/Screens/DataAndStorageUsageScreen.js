@@ -11,9 +11,9 @@ const DataAndStorageUsageScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={()=> navigation.goBack()}>
-        <View style={styles.leftContainer}>
+    
           <LeftBackArrow />
-        </View></TouchableOpacity>
+     </TouchableOpacity>
         <Text style={styles.titleText}>Data and Storage Usage</Text>
       </View>
 <ScrollView>

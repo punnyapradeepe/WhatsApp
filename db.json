@@ -1,15 +1,15 @@
 {
   "chats": [
     {
-      "id": "1",
-      "name": "Andrew Parker",
-      "message": "What kind of strategy is better?",
-      "date": "11/16/19",
-      "avatar": "pro1.png",
       "Firstname": "Andrew",
       "Lastname": "Parker",
       "Country": "India",
       "mobile": "+91 8086674333",
+      "name": "Andrew Parker",
+      "id": "1",
+      "message": "What kind of strategy is better?",
+      "date": "11/16/19",
+      "avatar": "pro1.png",
       "status": "Design adds value faster , than it adds cost",
       "StatusUpdateDate": "March 03,2020",
       "msgStatus": "read.png"
@@ -76,7 +76,7 @@
       "mobile": "+1 2025550181",
       "name": "Maisy Humphrey",
       "id": "6",
-      "message": "Welcome, to make design process faster, look at Pixsellz",
+      "message": "Welcome, to make design process fast",
       "date": "8/20/19",
       "avatar": "pro6.png",
       "status": "Design adds value faster , than it adds cost",
