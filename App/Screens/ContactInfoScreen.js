@@ -43,10 +43,10 @@ export default function ContactInfoScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <View style={{marginLeft:10}}>
-          <LeftBackArrow /></View>
+          <View style={{flexDirection:'row',marginLeft:10,alignItems:'center'}}>
+          <LeftBackArrow />
+        <Text style={styles.name1}>{`${Firstname} ${Lastname}`}</Text></View>
         </TouchableOpacity>
-        <Text style={styles.name1}>{`${Firstname} ${Lastname}`}</Text>
         <Text style={styles.headerTitle}>Contact Info</Text>
         <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('editContact', { id })}>
           <Text style={styles.editText}>Edit</Text>
@@ -125,6 +125,7 @@ export default function ContactInfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom:20
   },
   header: {
     flexDirection: 'row',

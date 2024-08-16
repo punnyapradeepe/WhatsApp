@@ -47,13 +47,13 @@ const styles = StyleSheet.create({
   settingsText: {
     color: Colors.PRIMARY,
     fontSize: 18,
-    marginRight: 10, 
+   
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     flex: 1,
-    textAlign: 'center', // Center title
+    textAlign: 'center',
   },
   imageContainer: {
     flex: 1,

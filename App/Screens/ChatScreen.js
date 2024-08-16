@@ -5,31 +5,49 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { Archive, Dots, EditBtn } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import imageMapping from './../../Components/imageMapping';
+const footerHeight = 60; 
 
 const getImageSource = (imageName) => {
   return imageMapping[imageName];
 };
 
-const ChatListItem = ({ id, name, message, date, avatar, msgStatus, isSelected, onSelect, onPress, onLongPress, onSwipeableWillOpen, isEditMode }) => {
+const ChatListItem = ({
+  id,
+  name,
+  message,
+  date,
+  avatar,
+  msgStatus,
+  isSelected,
+  onSelect,
+  onPress,
+  onLongPress,
+  onSwipeableWillOpen,
+  isEditMode // Add this prop
+}) => {
   const swipeableRef = useRef(null);
 
   return (
     <Swipeable
       ref={swipeableRef}
       onSwipeableWillOpen={() => {
-        onSwipeableWillOpen(swipeableRef);
+        if (!isEditMode) { // Only allow swipeable actions if not in edit mode
+          onSwipeableWillOpen(swipeableRef);
+        }
       }}
       renderRightActions={() => (
-        <View style={styles.rightActions}>
-          <TouchableOpacity style={[styles.actionButton, styles.archiveButton]}>
-            <Dots />
-            <Text style={styles.actionText}>More</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.actionButton, styles.archiveButton]}>
-            <Archive />
-            <Text style={styles.actionText}>Archive</Text>
-          </TouchableOpacity>
-        </View>
+        !isEditMode && ( // Only show right actions if not in edit mode
+          <View style={styles.rightActions}>
+            <TouchableOpacity style={[styles.actionButton, styles.archiveButton]}>
+              <Dots />
+              <Text style={styles.actionText}>More</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.actionButton, styles.archiveButton]}>
+              <Archive />
+              <Text style={styles.actionText}>Archive</Text>
+            </TouchableOpacity>
+          </View>
+        )
       )}
     >
       <TouchableOpacity
@@ -161,26 +179,29 @@ export default function ChatScreen() {
       </View>
 
       <FlatList
-        showsVerticalScrollIndicator={false}
-        data={data}
-        renderItem={({ item }) => (
-          <ChatListItem
-            id={item.id}
-            name={item.name}
-            message={item.message}
-            date={item.date}
-            avatar={item.avatar}
-            msgStatus={item.msgStatus}
-            isSelected={selectedItems.includes(item.id)}
-            onSelect={() => toggleSelection(item.id)}
-            onPress={() => handlePress(item)}
-            onLongPress={() => handleLongPress(item)}
-            onSwipeableWillOpen={handleSwipeableWillOpen}
-            isEditMode={isEditMode}
-          />
-        )}
-        keyExtractor={(item) => item.id.toString()}
-      />
+  showsVerticalScrollIndicator={false}
+  data={data}
+  renderItem={({ item }) => (
+    <ChatListItem
+      id={item.id}
+      name={item.name}
+      message={item.message}
+      date={item.date}
+      avatar={item.avatar}
+      msgStatus={item.msgStatus}
+      isSelected={selectedItems.includes(item.id)}
+      onSelect={() => toggleSelection(item.id)}
+      onPress={() => handlePress(item)}
+      onLongPress={() => handleLongPress(item)}
+      onSwipeableWillOpen={handleSwipeableWillOpen}
+      isEditMode={isEditMode}
+    />
+  )}
+  keyExtractor={(item) => item.id.toString()}
+  contentContainerStyle={{ paddingBottom: isEditMode ? footerHeight : 0 }} // Add padding bottom when in edit mode
+/>
+
+
 
       {isEditMode && (
         <View style={styles.footer}>
@@ -412,6 +433,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderTopWidth: 1,
     borderTopColor: '#ddd',
+    marginTop:20
   },
   footerButton: {
     paddingHorizontal: 20,

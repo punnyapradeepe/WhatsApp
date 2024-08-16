@@ -13,13 +13,12 @@ const NotificationSettingsScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={{ marginLeft: 5 }} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <LeftBackArrow />
         </TouchableOpacity>
-        <Text style={{ fontSize: 16, color: Colors.PRIMARY, marginLeft: 5 }}>Settings</Text>
         <Text style={styles.headerTitle}>Notifications</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <View style={styles.warningContainer}>
           <Text style={styles.warningText}>
             WARNING: Push Notifications are disabled. To enable visit: iPhone Settings {'>'} Notifications {'>'} WhatsApp
@@ -34,14 +33,14 @@ const NotificationSettingsScreen = () => {
               value={messageNotificationsEnabled}
               onValueChange={setMessageNotificationsEnabled}
               trackColor={{ false: Colors.Gray, true: Colors.PRIMARY }}
-              thumbColor={groupNotificationsEnabled ? 'white' : "#f4f3f4"}
+              thumbColor={messageNotificationsEnabled ? 'white' : "#f4f3f4"}
               ios_backgroundColor="#3e3e3e"
-           />
+            />
           </View>
           <TouchableOpacity style={styles.touchableRow}>
             <Text style={styles.Text}>Sound</Text>
             <Text style={styles.note}>Note</Text>
-            <SideArrow/>
+            <SideArrow />
           </TouchableOpacity>
         </View>
 
@@ -51,50 +50,44 @@ const NotificationSettingsScreen = () => {
           <View style={styles.row}>
             <Text style={styles.Text}>Show Notifications</Text>
             <Switch
-  style={styles.switchStyle}
-  value={groupNotificationsEnabled}
-  onValueChange={setGroupNotificationsEnabled}
-  trackColor={{ false: Colors.Gray, true: Colors.PRIMARY }}
-  thumbColor={groupNotificationsEnabled ? 'white' : "#f4f3f4"}
-  ios_backgroundColor="#3e3e3e"
-/>
-
-
+              style={styles.switchStyle}
+              value={groupNotificationsEnabled}
+              onValueChange={setGroupNotificationsEnabled}
+              trackColor={{ false: Colors.Gray, true: Colors.PRIMARY }}
+              thumbColor={groupNotificationsEnabled ? 'white' : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+            />
           </View>
           <TouchableOpacity style={styles.touchableRow}>
             <Text style={styles.Text}>Sound</Text>
             <Text style={styles.note}>Note</Text>
-            <SideArrow/>
+            <SideArrow />
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={styles.section}>
-  <View style={styles.row}>
-    <Text style={styles.Text}>In-App Notifications</Text>
-    <SideArrow />
-  </View>
-  <Text style={styles.note}>Banners, Sounds, Vibrate</Text>
-</TouchableOpacity>
-
+          <View style={styles.row}>
+            <Text style={styles.Text}>In-App Notifications</Text>
+            <SideArrow />
+          </View>
+          <Text style={styles.note1}>Banners, Sounds, Vibrate</Text>
+        </TouchableOpacity>
 
         <View style={styles.section}>
-          <View style={{ flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  }}>
+          <View style={styles.row}>
             <Text style={styles.Text}>Show Preview</Text>
             <Switch
               value={previewEnabled}
               onValueChange={setPreviewEnabled}
               trackColor={{ false: Colors.Gray, true: Colors.PRIMARY }}
-              thumbColor={groupNotificationsEnabled ? 'white' : "#f4f3f4"}
+              thumbColor={previewEnabled ? 'white' : "#f4f3f4"}
               ios_backgroundColor="#3e3e3e"
             />
           </View>
         </View>
         <Text style={styles.previewText}>Preview message text inside new message notifications.</Text>
 
-        <TouchableOpacity  style={styles.section}>
+        <TouchableOpacity style={styles.resetButton}>
           <Text style={styles.resetButtonText}>Reset Notification Settings</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -104,11 +97,15 @@ const NotificationSettingsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-
     backgroundColor: '#F5F5F5',
+    flex: 1,
+    paddingBottom:20
+  },
+  scrollViewContainer: {
+   
   },
   warningContainer: {
-    padding: 10,
+   
     backgroundColor: '#EFEFF4',
     marginBottom: 20,
     borderBottomWidth: 1,
@@ -122,7 +119,8 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: '15%',
+    textAlign: 'center',
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
@@ -134,26 +132,29 @@ const styles = StyleSheet.create({
     borderBottomColor: '#DDD',
     paddingTop: 40,
   },
+  backButton: {
+    marginLeft: 5,
+  },
   switchStyle: {
     transform: [{ scaleX: 1.10 }, { scaleY: 1.2 }],
-
   },
   section: {
     backgroundColor: '#FFFFFF',
     padding: 10,
     marginBottom: 20,
-    borderWidth: 1,
+    borderBottomWidth:1,
+    borderTopWidth:1,
     borderColor: Colors.Gray,
   },
   sectionTitle: {
     color: Colors.DarkGray,
     marginBottom: 10,
     fontWeight: 'bold',
-    marginLeft:20
+    marginLeft: 20,
   },
-  Text:{
-fontSize:18,
-fontWeight:'400'
+  Text: {
+    fontSize: 18,
+    fontWeight: '400',
   },
   row: {
     flexDirection: 'row',
@@ -170,26 +171,35 @@ fontWeight:'400'
     paddingVertical: 10,
   },
   note: {
-  marginLeft:'auto',
-  marginRight:10,
-    margintop:5,
-    color:Colors.DarkGray
+    marginLeft: 'auto',
+    marginRight: 10,
+    marginTop: 5,
+    color: Colors.DarkGray,
+  },
+  note1: {
+   
+    marginRight: 10,
+    marginTop: 5,
+    color: Colors.DarkGray,
   },
   previewText: {
     color: Colors.DarkGray,
-   marginLeft:10,
+    marginLeft: 10,
     fontSize: 15,
-    marginBottom:10
+    marginBottom: 10,
   },
   resetButton: {
     marginTop: 20,
     alignItems: 'center',
     padding: 10,
-
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: Colors.Gray,
+    borderRadius: 5,
   },
   resetButtonText: {
     color: 'red',
-    marginLeft:10,
+    fontSize: 16,
   },
 });
 

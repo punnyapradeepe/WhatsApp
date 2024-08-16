@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, ScrollView } from 'react-native';
 import Colors from '../Utils/Colors';
 import { LeftBackArrow, RightArrow } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -13,11 +13,10 @@ const DataAndStorageUsageScreen = () => {
         <TouchableOpacity onPress={()=> navigation.goBack()}>
         <View style={styles.leftContainer}>
           <LeftBackArrow />
-          <Text style={styles.settingsText}>Settings</Text>
         </View></TouchableOpacity>
         <Text style={styles.titleText}>Data and Storage Usage</Text>
       </View>
-
+<ScrollView>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>MEDIA AUTO-DOWNLOAD</Text>
         <TouchableOpacity style={styles.option1}>
@@ -71,24 +70,29 @@ const DataAndStorageUsageScreen = () => {
         <Text style={styles.optionText}>Storage Usage</Text>
         <View style={{ marginRight: 10 }}><RightArrow /></View>
       </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#F5F5F5',
     flex: 1,
-    backgroundColor: '#F8F8F8',
+    paddingBottom:20
   },
   header: {
-    backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,
-    paddingVertical: 15,
-    marginTop: 30,
-    justifyContent: 'space-between',
+    paddingVertical: 10,
+    backgroundColor: '#FFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#DDD',
+    paddingTop: 40,
+    justifyContent: 'space-between', 
   },
+
   leftContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -107,6 +111,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     textAlign: 'center',
+    top:40
   },
   section: {
    
@@ -152,8 +157,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   optionText: {
-    fontSize: 16,
-    color: '#000',
+    fontSize: 18,
+    fontWeight: '400',
   },
   optionText1: {
     fontSize: 16,

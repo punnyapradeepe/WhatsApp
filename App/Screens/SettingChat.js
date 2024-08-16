@@ -14,7 +14,7 @@ export default function SettingChat() {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backArrowContainer}>
           <LeftBackArrow style={styles.backArrow} />
         </TouchableOpacity>
-        <Text style={styles.settingsText}>Settings</Text>
+      
         <Text style={styles.editProfileText}>Chats</Text>
       </View>
 
@@ -33,7 +33,6 @@ export default function SettingChat() {
           thumbColor={saveToCameraRollEnabled ? 'white' : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
         />
-  
       </View>
 
       <Text style={styles.infoText}>
@@ -64,37 +63,34 @@ export default function SettingChat() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#F5F5F5',
     flex: 1,
-    backgroundColor: Colors.BackgroundGray,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    marginTop: 30,
-    position: 'relative',
-    backgroundColor:'white'
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: '#FFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#DDD',
+    paddingTop: 40,
+    justifyContent: 'center', 
+  },
+  backArrowContainer: {
+    position: 'absolute',
+    left: 15,
+    top:40
   },
   backArrow: {
-    marginLeft: 10,
-    marginRight: 10,
-    zIndex: 1, // Ensure this is on top
-  },
-  settingsText: {
-    fontSize: 18,
-    color: Colors.PRIMARY,
-    marginLeft: 3,
+    zIndex: 1,
   },
   editProfileText: {
     fontSize: 20,
     color: Colors.Black,
-    position: 'absolute',
     fontWeight: 'bold',
-    left: 0,
-    right: 0,
     textAlign: 'center',
-    zIndex: 0,
+    flex: 1,
   },
   statusContainer: {
     flexDirection: 'row',
@@ -107,7 +103,7 @@ const styles = StyleSheet.create({
   },
   StatusText: {
     fontSize: 16,
-    flex: 1, // This allows the text to take up available space
+    flex: 1, 
   },
   infoText: {
     marginTop: 5,

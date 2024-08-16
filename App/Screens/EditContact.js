@@ -117,7 +117,7 @@ export default function EditContactScreen() {
 
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.fieldContainer}>
-          <Text style={styles.fieldLabel}>Name</Text>
+          <Text style={styles.fieldLabel}>Name   </Text>
           <View>
             <TextInput
               style={styles.fieldValue}
@@ -145,7 +145,7 @@ export default function EditContactScreen() {
         </View>
 
         <View style={styles.fieldContainer}>
-          <Text style={styles.fieldLabel}>Mobile</Text>
+          <Text style={styles.fieldLabel}>Mobile </Text>
           <TextInput
             style={styles.fieldValue}
             value={contact.mobile}
@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
     paddingVertical: 10,
+    paddingHorizontal:10
   },
   fieldLabel: {
     fontSize: 18,

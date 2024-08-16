@@ -6,7 +6,7 @@ import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 
 export default function EditProfile() {
-  const [profileImage, setProfileImage] = useState(require('./../../assets/Images/Oval 2.png')); // Default profile image
+  const [profileImage, setProfileImage] = useState(require('./../../assets/Images/Oval 2.png')); 
 const navigation = useNavigation();
   const selectImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -58,7 +58,7 @@ const navigation = useNavigation();
         </View>
         <TextInput style={styles.sectionLabel}>PHONE NUMBER</TextInput>
         <View style={styles.infoSection}>
-          <Text style={styles.infoText}>+988346244571</Text>
+          <Text style={styles.infoText}>+91 8086658470</Text>
         </View>
         <Text style={styles.sectionLabel}>ABOUT</Text>
         <View style={styles.infoSection}>
@@ -131,6 +131,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   descriptionText: {
+    color: Colors.DarkGray,
+    paddingBottom: 5,
+  },
+  descriptionText1: {
     color: Colors.DarkGray,
     paddingBottom: 10,
   },
