@@ -32,7 +32,6 @@ export default function App() {
         <Stack.Screen name="whats" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="notification" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="data" component={TabNavigation} options={{ headerShown: false }} />
-        <Stack.Screen name="calledit" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="calleditcomp" component={CallEditComp} options={{ headerShown: false }} />
 
 

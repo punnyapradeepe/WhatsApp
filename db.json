@@ -57,15 +57,15 @@
       "msgStatus": "pic.png"
     },
     {
-      "id": "5",
-      "name": "Tabitha Potter",
-      "message": "Actually I wanted to check with you about your online business plan on our...",
-      "date": "8/25/19",
-      "avatar": "pro5.png",
       "Firstname": "Tabitha",
       "Lastname": "Potter",
       "Country": "India",
       "mobile": "+91 8086674333",
+      "name": "Tabitha Potter",
+      "id": "5",
+      "message": "Actually I wanted to check with you about your online business plan on our...",
+      "date": "8/25/19",
+      "avatar": "pro5.png",
       "status": "Unknown",
       "StatusUpdateDate": "March 03,2020"
     },

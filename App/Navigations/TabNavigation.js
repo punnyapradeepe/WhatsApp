@@ -16,7 +16,6 @@ import AccountScreeen from '../Screens/AccountScreeen';
 import SettingChat from '../Screens/SettingChat';
 import NotificationSettingsScreen from '../Screens/NotificationSettingsScreen';
 import DataAndStorageUsageScreen from '../Screens/DataAndStorageUsageScreen';
-import CallEdit from '../Screens/CallEdit';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -91,7 +90,6 @@ const SettingsScreenStack = () => (
 const CallScreenStack = () => (
   <Stack.Navigator initialRouteName="Calls">
     <Stack.Screen name="Calls" component={CallScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="calledit" component={CallEdit} options={{ headerShown: false }} />
  
   </Stack.Navigator>
 );

@@ -70,7 +70,7 @@ export default function ChatScreen() {
   const [selectedItems, setSelectedItems] = useState([]);  
 
   useEffect(() => {
-    const url = 'http://192.168.55.101:5000/chats';
+    const url = 'http://192.168.137.1:5000/chats';
 
     fetch(url)
       .then(response => response.json())
