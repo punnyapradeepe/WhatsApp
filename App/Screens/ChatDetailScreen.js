@@ -9,12 +9,12 @@ export default function ChatDetailScreen({ route }) {
   const navigation = useNavigation();
   const { id, name, avatar } = route.params; 
   const [modalVisible, setModalVisible] = useState(false);
+  const [optionsModalVisible, setOptionsModalVisible] = useState(false);
   const [chatData, setChatData] = useState(null);
   const [inputText, setInputText] = useState(''); 
   const [messages, setMessages] = useState([]);  
-  const [editMessageId, setEditMessageId] = useState(null); // Track message being edited
-  const [editText, setEditText] = useState(''); // Store the text being edited
-
+  const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
+  
   useEffect(() => {
     const url = `http://192.168.55.101:5000/chats/${id}`;
 
@@ -56,70 +56,68 @@ export default function ChatDetailScreen({ route }) {
   };
 
   const handleLongPress = (index) => {
-    setEditMessageId(index);
-    setEditText(messages[index].text);
-  };
-
-  const handleEditMessage = () => {
-    if (editMessageId !== null) {
-      const updatedMessages = [...messages];
-      updatedMessages[editMessageId].text = editText;
-      setMessages(updatedMessages);
-      setEditMessageId(null);
-      setEditText('');
-    }
+    setSelectedMessageIndex(index);
+    setOptionsModalVisible(true);
   };
 
   const handleDeleteMessage = () => {
-    if (editMessageId !== null) {
-      const updatedMessages = messages.filter((_, index) => index !== editMessageId);
-      setMessages(updatedMessages);
-      setEditMessageId(null);
-      setEditText('');
-    }
+    setMessages(messages.filter((_, i) => i !== selectedMessageIndex));
+    setOptionsModalVisible(false);
+  };
+
+  const handleEditMessage = () => {
+    setInputText(messages[selectedMessageIndex].text);
+    setMessages(messages.filter((_, i) => i !== selectedMessageIndex));
+    setOptionsModalVisible(false);
   };
 
   return (
     <View style={styles.container}>
+
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} >
-          <View style={{marginLeft: 10}}>
-            <Back />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={{flexDirection: 'row', paddingRight: 15, marginLeft: 'auto'}} onPress={() => navigation.navigate('contactInfo', { id })}>
+        <TouchableOpacity onPress={()=>navigation.goBack()} >
+          <View style={{marginleft:10}}>
+        <Back /></View></TouchableOpacity>
+        <TouchableOpacity style={{flexDirection: 'row',paddingRight:15,marginleft:'auto'}} onPress={() => navigation.navigate('contactInfo', { id })}>
           <Image source={imageMapping[avatar]} style={styles.avatar} />
           <View>
             <Text style={styles.headerTitle}>{name}</Text>
-            <Text style={{ color: Colors.DarkGray, paddingLeft: 10 }}>Tap here for contact info</Text>
+            <Text style={{ color: Colors.DarkGray ,paddingLeft:10}}>Tap here for contact info</Text>
           </View>
         </TouchableOpacity>
         <VideoCall />
         <Call />
       </View>
 
+    
       <ImageBackground source={require('./../../assets/Images/Rectangle (2).png')} style={styles.backgroundImage}>
+       
         <View style={styles.messagesContainer}>
-          <FlatList
-            data={messages}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <>
-                {index === 0 || messages[index - 1].date !== item.date ? (
-                  <View style={styles.dateContainer}>
-                    <Text style={styles.dateText}>{item.date}</Text>
-                  </View>
-                ) : null}
-                <TouchableOpacity onLongPress={() => handleLongPress(index)} style={styles.messageContainer}>
-                  <Text style={styles.messageText}>{item.text}</Text>
-                  <Text style={styles.messageTime}>{item.time}</Text>
-                </TouchableOpacity>
-              </>
-            )}
-            contentContainerStyle={{ padding: 10 }}
-          />
+        <FlatList
+  data={messages}
+  keyExtractor={(item, index) => index.toString()}
+  renderItem={({ item, index }) => (
+    <>
+      {index === 0 || messages[index - 1].date !== item.date ? (
+        <View style={styles.dateContainer}>
+          <Text style={styles.dateText}>{item.date}</Text>
+        </View>
+      ) : null}
+      <TouchableOpacity
+        onLongPress={() => handleLongPress(index)}
+        style={styles.messageContainer}
+      >
+        <Text style={styles.messageText}>{item.text}</Text>
+        <Text style={styles.messageTime}>{item.time}</Text>
+      </TouchableOpacity>
+    </>
+  )}
+  contentContainerStyle={{ padding: 10 }}
+/>
+
         </View>
 
+    
         <View style={styles.footer}>
           <TouchableOpacity onPress={openModal}>
             <Add />
@@ -139,6 +137,7 @@ export default function ChatDetailScreen({ route }) {
         </View>
       </ImageBackground>
 
+     
       <Modal
         animationType="slide"
         transparent={true}
@@ -184,34 +183,26 @@ export default function ChatDetailScreen({ route }) {
         </View>
       </Modal>
 
-      {editMessageId !== null && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={editMessageId !== null}
-          onRequestClose={() => setEditMessageId(null)}
-        >
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContainer}>
-              <TextInput
-                style={styles.textInput}
-                value={editText}
-                onChangeText={setEditText}
-                placeholder="Edit message"
-              />
-              <TouchableOpacity style={styles.modalButton} onPress={handleEditMessage}>
-                <Text style={styles.modalText}>Edit</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.modalButton} onPress={handleDeleteMessage}>
-                <Text style={styles.modalText}>Delete</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.cancelButton} onPress={() => setEditMessageId(null)}>
-                <Text style={styles.cancelText}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={optionsModalVisible}
+        onRequestClose={() => setOptionsModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.optionsContainer}>
+            <TouchableOpacity style={styles.optionButton} onPress={handleEditMessage}>
+              <Text style={styles.optionText}>Edit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.optionButton} onPress={handleDeleteMessage}>
+              <Text style={styles.optionText}>Delete</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.cancelButton} onPress={() => setOptionsModalVisible(false)}>
+              <Text style={styles.cancelText}>Cancel</Text>
+            </TouchableOpacity>
           </View>
-        </Modal>
-      )}
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -351,37 +342,22 @@ const styles = StyleSheet.create({
   stickerIcon: {
     marginLeft: 10,
   },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  modalContainer: {
-    width: '80%',
-    backgroundColor: '#fff',
+  optionsContainer: {
+    backgroundColor: 'white',
+    padding: 20,
     borderRadius: 10,
-    padding: 15,
-    elevation: 5,
+    marginHorizontal: 20,
+    alignItems: 'center',
   },
-  modalButton: {
+  optionButton: {
     paddingVertical: 15,
-    paddingHorizontal: 10,
+    width: '100%',
+    alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
   },
-  modalText: {
-    fontSize: 16,
-  },
-  cancelButton: {
-    padding: 15,
-    backgroundColor: Colors.Gray,
-    borderRadius: 10,
-    marginTop: 10,
-    alignItems: 'center',
-  },
-  cancelText: {
-    color: '#fff',
-    fontSize: 16,
+  optionText: {
+    fontSize: 18,
+    fontWeight: '500',
   },
 });
