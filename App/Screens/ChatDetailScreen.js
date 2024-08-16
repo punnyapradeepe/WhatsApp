@@ -14,6 +14,8 @@ export default function ChatDetailScreen({ route }) {
   const [inputText, setInputText] = useState(''); 
   const [messages, setMessages] = useState([]);  
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
+  const [isEdited, setIsEdited] = useState(false);
+
   
   useEffect(() => {
     const url = `http://192.168.137.1:5000/chats/${id}`;
@@ -46,14 +48,17 @@ export default function ChatDetailScreen({ route }) {
     if (inputText.trim().length > 0) {
       const newMessage = {
         text: inputText,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Add timestamp
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         date: formatDate(),
+        isEdited: isEdited, // Track if the message was edited
       };
-      setMessages([...messages, newMessage]); 
-      setInputText(''); 
-      Keyboard.dismiss();  
+      setMessages([...messages, newMessage]);
+      setInputText('');
+      setIsEdited(false); // Reset after sending the message
+      Keyboard.dismiss();
     }
   };
+  
 
   const handleLongPress = (index) => {
     setSelectedMessageIndex(index);
@@ -69,8 +74,9 @@ export default function ChatDetailScreen({ route }) {
     setInputText(messages[selectedMessageIndex].text);
     setMessages(messages.filter((_, i) => i !== selectedMessageIndex));
     setOptionsModalVisible(false);
+    setIsEdited(true); // Set this to true when editing a message
   };
-
+  
   return (
     <View style={styles.container}>
 
@@ -109,11 +115,13 @@ export default function ChatDetailScreen({ route }) {
       >
         <Text style={styles.messageText}>{item.text}</Text>
         <Text style={styles.messageTime}>{item.time}</Text>
+        {item.isEdited && <Text style={styles.editedLabel}>Edited</Text>}
       </TouchableOpacity>
     </>
   )}
   contentContainerStyle={{ padding: 10 }}
 />
+
 
         </View>
 
@@ -269,6 +277,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
   },
+  editedLabel: {
+    fontSize: 10,
+    color: Colors.DarkGray,
+    marginTop: 2,
+  },
+  
   modalOverlay: {
     flex: 1,
     justifyContent: 'flex-end',
