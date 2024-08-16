@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
   mobile: {
     fontSize: 16,
-    textAlign: 'center',
+  
     color: Colors.DarkGray,
   },
   status: {
