@@ -82,8 +82,7 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 20,
     paddingVertical: 15,
-    marginTop: 20,
-    backgroundColor: '#FFF',
+    marginTop: 30,
     borderBottomWidth: 1,
     borderBottomColor: Colors.Gray,
     flexDirection: 'row',
@@ -93,9 +92,10 @@ const styles = StyleSheet.create({
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginRight:'auto'
   },
   backArrowContainer: {
-    padding: 10,
+   
   },
   backArrow: {
     width: 10,
@@ -111,9 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.Black,
     fontWeight: 'bold',
-    textAlign: 'center',
-    flex: 1,
-    textAlign: 'center',
+    marginRight:'35%'
   },
   content: {
     flex: 1,

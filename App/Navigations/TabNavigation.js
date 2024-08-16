@@ -34,7 +34,7 @@ const TabNavigation = () => (
       component={StatusScreen}
       options={{
         tabBarIcon: ({ color, size, focused }) => (
-          <StatusImg width={size} height={size} fill={focused ? 'blue' : 'black'} />
+          <StatusImg width={size} height={size} fill={focused ? 'blue' : Colors.DarkGray} />
         ),
       }}
     />
@@ -43,7 +43,7 @@ const TabNavigation = () => (
       component={CallScreenStack}
       options={{
         tabBarIcon: ({ color, size, focused }) => (
-          <CallImg width={size} height={size} fill={focused ? 'blue' : 'black'} />
+          <CallImg width={size} height={size} fill={focused ? 'blue' : Colors.DarkGray} />
         ),
       }}
     />
@@ -52,7 +52,7 @@ const TabNavigation = () => (
       component={CameraScreen}
       options={{
         tabBarIcon: ({ color, size, focused }) => (
-          <CameraImg width={size} height={size} fill={focused ? 'blue' : 'black'} />
+          <CameraImg width={size} height={size} fill={focused ? 'blue' : Colors.DarkGray} />
         ),
       }}
     />
@@ -61,7 +61,7 @@ const TabNavigation = () => (
       component={ChatScreen}
       options={{
         tabBarIcon: ({ color, size, focused }) => (
-          <ChatImg width={size} height={size} fill={focused ? 'blue' : 'black'} />
+          <ChatImg width={size} height={size} fill={focused ? 'blue' : Colors.DarkGray} />
         ),
       }}
     />
@@ -70,7 +70,7 @@ const TabNavigation = () => (
       component={SettingsScreenStack}
       options={{
         tabBarIcon: ({ color, size, focused }) => (
-          <SettingsImg width={size} height={size} fill={focused ? 'blue' : 'black'} />
+          <SettingsImg width={size} height={size} fill={focused ? 'blue' : Colors.DarkGray} />
         ),
       }}
     />

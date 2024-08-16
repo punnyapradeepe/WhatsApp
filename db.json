@@ -29,32 +29,18 @@
       "msgStatus": "audio.png"
     },
     {
-      "id": "3",
-      "name": "Maximi Jacob",
-      "message": "Bro, I have a good idea!",
-      "date": "10/30/19",
-      "avatar": "pro3.png",
       "Firstname": "Maximi",
       "Lastname": "Jacob",
       "Country": "New Zealand",
       "mobile": "+1 2025550181",
+      "name": "Maximi Jacob",
+      "id": "3",
+      "message": "Bro, I have a good idea!",
+      "date": "10/30/19",
+      "avatar": "pro3.png",
       "status": "Design adds value faster , than it adds cost",
       "StatusUpdateDate": "Dec 18,2018",
       "msgStatus": "read.png"
-    },
-    {
-      "Firstname": "Martha",
-      "Lastname": "Craig",
-      "Country": "New Zealand",
-      "mobile": "+1 2025550181",
-      "name": "Martha Craig",
-      "id": "4",
-      "message": "Photo",
-      "date": "10/28/19",
-      "avatar": "pro4.png",
-      "status": "Design adds value faster , than it adds cost",
-      "StatusUpdateDate": "Dec 18,2018",
-      "msgStatus": "pic.png"
     },
     {
       "Firstname": "Tabitha",

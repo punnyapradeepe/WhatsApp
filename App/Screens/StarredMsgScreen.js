@@ -42,17 +42,17 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   backArrow: {
-    marginRight: 10,
+  
   },
   settingsText: {
     color: Colors.PRIMARY,
-    fontSize: 18,
+    fontSize: 17,
    
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    flex: 1,
+   paddingLeft:30,
     textAlign: 'center',
   },
   imageContainer: {

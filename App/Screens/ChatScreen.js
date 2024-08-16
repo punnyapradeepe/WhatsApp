@@ -38,7 +38,7 @@ const ChatListItem = ({
       renderRightActions={() => (
         !isEditMode && ( // Only show right actions if not in edit mode
           <View style={styles.rightActions}>
-            <TouchableOpacity style={[styles.actionButton, styles.archiveButton]}>
+            <TouchableOpacity style={[styles.actionButton, styles.archiveButton1]}>
               <Dots />
               <Text style={styles.actionText}>More</Text>
             </TouchableOpacity>
@@ -88,7 +88,7 @@ export default function ChatScreen() {
   const [selectedItems, setSelectedItems] = useState([]);  
 
   useEffect(() => {
-    const url = 'http://192.168.137.1:5000/chats';
+    const url = 'http://192.168.1.40:5000/chats';
 
     fetch(url)
       .then(response => response.json())
@@ -357,6 +357,9 @@ const styles = StyleSheet.create({
   },
   archiveButton: {
     backgroundColor: '#3E70A3',
+  },
+  archiveButton1: {
+    backgroundColor: Colors.Gray,
   },
   actionText: {
     color: 'white',

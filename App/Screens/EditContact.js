@@ -18,7 +18,7 @@ export default function EditContactScreen() {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const response = await fetch(`http://192.168.137.1:5000/chats/${id}`);
+        const response = await fetch(`http://192.168.1.40:5000/chats/${id}`);
         const data = await response.json();
         setContact((prev) => ({
           ...prev,
@@ -42,7 +42,7 @@ export default function EditContactScreen() {
 
   const handleSave = async () => {
     try {
-      const response = await fetch(`http://192.168.137.1:5000/chats/${id}`, {
+      const response = await fetch(`http://192.168.1.40:5000/chats/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export default function EditContactScreen() {
           text: "Delete",
           onPress: async () => {
             try {
-              const response = await fetch(`http://192.168.137.1:5000/chats/${id}`, {
+              const response = await fetch(`http://192.168.1.40:5000/chats/${id}`, {
                 method: 'DELETE',
               });
               if (response.ok) {
