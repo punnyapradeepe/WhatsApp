@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   headerTitle: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
   },
   modalOverlay: {
@@ -232,11 +232,11 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
   },
   subText: {
     color: Colors.DarkGray,
-    fontSize: 14,
+    fontSize: 16,
   },
   rightArrow: {
     marginRight: 20,
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   messageText: {
-    fontSize: 16,
+    fontSize: 18,
     marginRight: 'auto',
   },
 });
