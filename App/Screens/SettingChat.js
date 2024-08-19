@@ -14,6 +14,9 @@ export default function SettingChat() {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <LeftBackArrow style={styles.backArrow} />
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <Text style={{color:Colors.PRIMARY,fontSize:16}}>Settings</Text>
+        </TouchableOpacity>
         <Text style={styles.editProfileText}>Chats</Text>
       </View>
 
@@ -90,6 +93,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     flex: 1,
+     marginRight:'20%'
   },
   statusContainer: {
     flexDirection: 'row',

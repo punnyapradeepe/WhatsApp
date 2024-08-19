@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Swipeable } from 'react-native-gesture-handler';
-import { Archive, Dots, EditBtn } from '../Utils/SvgIcons';
+import { Archive, Dots, EditBtn, Right, SideArrow } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import imageMapping from './../../Components/imageMapping';
 const footerHeight = 60; 
@@ -23,7 +23,7 @@ const ChatListItem = ({
   onPress,
   onLongPress,
   onSwipeableWillOpen,
-  isEditMode // Add this prop
+  isEditMode
 }) => {
   const swipeableRef = useRef(null);
 
@@ -66,6 +66,8 @@ const ChatListItem = ({
           <View style={styles.messageHeader}>
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.date}>{date}</Text>
+            <View style={{marginTop:10,marginRight:10}}>
+            <Right/></View>
           </View>
           <View style={styles.messageWithStatusContainer}>
             <Image source={getImageSource(msgStatus)} style={styles.msgStatus} />
@@ -168,7 +170,7 @@ export default function ChatScreen() {
           <EditBtn />
         </TouchableOpacity>
       </View>
-
+<View style={{backgroundColor:'white',padding:10}}>
       <View style={styles.row}>
         <TouchableOpacity style={styles.rowButton}>
           <Text style={styles.rowButtonText}>Broadcast Lists</Text>
@@ -176,6 +178,7 @@ export default function ChatScreen() {
         <TouchableOpacity style={[styles.rowButton, styles.newGroupButton]}>
           <Text style={styles.rowButtonText}>New Group</Text>
         </TouchableOpacity>
+     
       </View>
 
       <FlatList
@@ -248,6 +251,7 @@ export default function ChatScreen() {
           </View>
         </Modal>
       )}
+         </View>
     </View>
   );
 }
@@ -257,20 +261,19 @@ export default function ChatScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    paddingTop: 40,
-    padding:10
-
+    backgroundColor: '#f8f8f8',
+    paddingTop: 30,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
+    marginLeft:10,
+    marginRight:10,
   },
   headerButton: {
     padding: 10,
@@ -305,8 +308,6 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
   },
   avatar: {
     width: 50,
@@ -317,6 +318,8 @@ const styles = StyleSheet.create({
   messageContainer: {
     flex: 1,
     justifyContent: 'center',
+    borderBottomWidth:1,
+    borderColor: Colors.Gray
   },
   messageHeader: {
     flexDirection: 'row',
@@ -330,6 +333,8 @@ const styles = StyleSheet.create({
   date: {
     color: 'gray',
     fontSize: 12,
+    marginLeft:'auto',
+    marginRight:10
   },
   messageWithStatusContainer: {
     flexDirection: 'row',
@@ -354,6 +359,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 15,
+    marginBottom:10,
   },
   archiveButton: {
     backgroundColor: '#3E70A3',

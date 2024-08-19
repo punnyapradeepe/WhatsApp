@@ -12,7 +12,8 @@ export default function StarredMsgScreen() {
         <TouchableOpacity style={styles.backArrow} onPress={() => navigation.goBack()}>
           <LeftBackArrow />
         </TouchableOpacity>
-        <Text style={styles.settingsText}>Settings</Text>
+        <TouchableOpacity onPress={()=>navigation.goBack()}>
+        <Text style={styles.settingsText}>Settings</Text></TouchableOpacity>
         <Text style={styles.headerTitle}>Starred Messages</Text>
       </View>
 

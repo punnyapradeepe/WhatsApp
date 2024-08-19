@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Colors from '../Utils/Colors';
-import { CallBtn } from '../Utils/SvgIcons';
+import { CallBtn, CallIcon, CallScrn } from '../Utils/SvgIcons';
 
 const initialCallHistory = [
   {
@@ -127,19 +127,28 @@ export default function CallScreen() {
       )}
       <Image source={item.avatar} style={styles.avatar} />
       <View style={styles.infoContainer}>
-        <Text
-          style={[
-            styles.name,
-            item.type === 'missed' && styles.missedCallName,
-          ]}
-        >
-          {item.name}
-        </Text>
-        <Text style={styles.callType}>{item.type}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text
+            style={[
+              styles.name,
+              item.type === 'missed' && styles.missedCallName,
+            ]}
+          >
+            {item.name}
+          </Text>
+          <View style={{ flexDirection: 'row', marginLeft: 'auto' }}>
+            <Text style={styles.date}>{item.date}</Text>
+            {!isEditing && <CallIcon />} 
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <CallScrn />
+          <Text style={styles.callType}>{item.type}</Text>
+        </View>
       </View>
-      <Text style={styles.date}>{item.date}</Text>
     </View>
   );
+  
 
   const filteredData = filter === 'All' ? callHistory : callHistory.filter(item => item.type === 'missed');
 
@@ -175,12 +184,13 @@ export default function CallScreen() {
           </TouchableOpacity>
         )}
       </View>
+      <View style={{backgroundColor:'white'}}>
       <FlatList
         data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
-    </View>
+    </View></View>
   );
 }
 
@@ -189,7 +199,7 @@ export default function CallScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+   
   },
   header: {
     flexDirection: 'row',
@@ -197,11 +207,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 30,
-    backgroundColor: '#f8f8f8',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-    marginTop: 30,
-    paddingBottom: 20,
+    marginTop:25,
+    paddingBottom: 8,
   },
   filterContainer: {
     flexDirection: 'row',
@@ -231,8 +238,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+  
   },
   avatar: {
     width: 50,
@@ -242,6 +248,8 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
+    borderBottomWidth:1,
+    borderColor:Colors.Gray
   },
   name: {
     fontSize: 16,
@@ -258,6 +266,7 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 14,
     color: '#999',
+    marginRight:10
   },
   redCircle: {
     width: 24,

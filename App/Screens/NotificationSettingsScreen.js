@@ -16,6 +16,7 @@ const NotificationSettingsScreen = () => {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <LeftBackArrow />
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=> navigation.goBack()}><Text style={{fontSize:16,color:Colors.PRIMARY}}>Settings</Text></TouchableOpacity>
         <Text style={styles.headerTitle}>Notifications</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>

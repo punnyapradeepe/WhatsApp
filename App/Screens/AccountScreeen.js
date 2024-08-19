@@ -13,6 +13,9 @@ export default function AccountScreeen() {
      <TouchableOpacity style={ styles.backArrow} onPress={() => navigation.goBack()}>
           <LeftBackArrow />
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <Text style={{color:Colors.PRIMARY,fontSize:16}}>Settings</Text>
+        </TouchableOpacity>
 
         <Text style={styles.editProfileText}>Account</Text>
       </View>

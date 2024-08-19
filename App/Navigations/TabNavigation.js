@@ -101,12 +101,13 @@ const styles = StyleSheet.create({
     elevation: 0,
     shadowOpacity: 0,
     paddingHorizontal: 20,
-    height: 70,
+    height: 100,
     borderTopWidth: 1,
     borderColor:Colors.Gray,
   },
   tabBarLabel: {
-    marginBottom: 10, }
+    marginTop: -20,
+  marginBottom:20 }
     
 });
 
