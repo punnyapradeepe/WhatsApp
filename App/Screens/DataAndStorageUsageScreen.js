@@ -16,7 +16,7 @@ const DataAndStorageUsageScreen = () => {
      
         <Text style={styles.titleText}>Data and Storage Usage</Text>
       </View>
-<ScrollView>
+      <ScrollView>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>MEDIA AUTO-DOWNLOAD</Text>
         <TouchableOpacity style={styles.option1}>

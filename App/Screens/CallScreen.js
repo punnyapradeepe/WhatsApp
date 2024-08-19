@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Colors from '../Utils/Colors';
 import { CallBtn, CallIcon, CallScrn } from '../Utils/SvgIcons';
 
@@ -184,22 +184,19 @@ export default function CallScreen() {
           </TouchableOpacity>
         )}
       </View>
-      <ScrollView style={{backgroundColor:'white'}}>
       <FlatList
         data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={{ backgroundColor: 'white' }} // Ensures background color
       />
-    </ScrollView></View>
+    </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   
   },
   header: {
     flexDirection: 'row',
@@ -207,7 +204,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 30,
-    marginTop:25,
+    marginTop: 25,
     paddingBottom: 8,
   },
   filterContainer: {
@@ -238,7 +235,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 7,
     paddingHorizontal: 10,
-  
   },
   avatar: {
     width: 50,
@@ -248,8 +244,8 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    borderBottomWidth:1,
-    borderColor:Colors.Gray
+    borderBottomWidth: 1,
+    borderColor: Colors.Gray,
   },
   name: {
     fontSize: 16,
@@ -266,7 +262,7 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 14,
     color: '#999',
-    marginRight:10
+    marginRight: 10,
   },
   redCircle: {
     width: 24,
