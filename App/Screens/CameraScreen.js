@@ -28,10 +28,7 @@ export default function CameraScreen() {
     }
   };
 
-  // Use useEffect to open the camera when the component mounts
-  useFocusEffect(() => {
-    openCamera();
-  }, []);
+
 
   return (
     <View style={styles.container}>

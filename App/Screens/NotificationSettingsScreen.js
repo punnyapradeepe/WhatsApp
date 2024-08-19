@@ -16,7 +16,7 @@ const NotificationSettingsScreen = () => {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <LeftBackArrow />
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.goBack()}><Text style={{fontSize:16,color:Colors.PRIMARY}}>Settings</Text></TouchableOpacity>
+        <TouchableOpacity onPress={()=> navigation.goBack()}><Text style={{fontSize:18,color:Colors.PRIMARY}}>Settings</Text></TouchableOpacity>
         <Text style={styles.headerTitle}>Notifications</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
@@ -75,7 +75,7 @@ const NotificationSettingsScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.section}>
-          <View style={styles.row}>
+          <View style={styles.row3}>
             <Text style={styles.Text}>Show Preview</Text>
             <Switch
               value={previewEnabled}
@@ -106,7 +106,8 @@ const styles = StyleSheet.create({
    
   },
   warningContainer: {
-   
+   paddingBottom:20,
+   paddingTop:20,
     backgroundColor: '#EFEFF4',
     marginBottom: 20,
     borderBottomWidth: 1,
@@ -115,13 +116,13 @@ const styles = StyleSheet.create({
   warningText: {
     color: 'gray',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
   },
   headerTitle: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
-    flex: 1,
+    flex: .8,
   },
   header: {
     flexDirection: 'row',
@@ -152,6 +153,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontWeight: 'bold',
     marginLeft: 20,
+    fontSize:16
   },
   Text: {
     fontSize: 18,
@@ -164,6 +166,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomColor: '#EFEFEF',
     borderBottomWidth: 1,
+  },
+  row3: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+  
   },
   touchableRow: {
     flexDirection: 'row',
@@ -181,7 +190,7 @@ const styles = StyleSheet.create({
    
     marginRight: 10,
     marginTop: 5,
-    color: Colors.DarkGray,
+
   },
   previewText: {
     color: Colors.DarkGray,
@@ -200,7 +209,7 @@ const styles = StyleSheet.create({
   },
   resetButtonText: {
     color: 'red',
-    fontSize: 16,
+    fontSize: 18,
   },
 });
 

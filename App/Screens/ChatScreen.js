@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     position: 'absolute',
-    bottom: 0,
+    bottom: -55,
     left: 0,
     right: 0,
     backgroundColor: '#f8f8f8',
@@ -442,7 +442,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderTopWidth: 1,
     borderTopColor: '#ddd',
-    marginTop:20
+
   },
   footerButton: {
     paddingHorizontal: 20,

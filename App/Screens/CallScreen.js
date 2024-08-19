@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Colors from '../Utils/Colors';
 import { CallBtn, CallIcon, CallScrn } from '../Utils/SvgIcons';
 
@@ -141,7 +141,7 @@ export default function CallScreen() {
             {!isEditing && <CallIcon />} 
           </View>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' ,marginBottom:5}}>
           <CallScrn />
           <Text style={styles.callType}>{item.type}</Text>
         </View>
@@ -184,13 +184,13 @@ export default function CallScreen() {
           </TouchableOpacity>
         )}
       </View>
-      <View style={{backgroundColor:'white'}}>
+      <ScrollView style={{backgroundColor:'white'}}>
       <FlatList
         data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
-    </View></View>
+    </ScrollView></View>
   );
 }
 
@@ -236,8 +236,8 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
   
   },
   avatar: {

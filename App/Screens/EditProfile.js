@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   backArrow: {
     width: 10,
     height:10,
+    marginRight:5
   },
   settingsTextContainer: {
   },

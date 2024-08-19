@@ -13,9 +13,10 @@ export default function AccountScreeen() {
      <TouchableOpacity style={ styles.backArrow} onPress={() => navigation.goBack()}>
           <LeftBackArrow />
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.goBack()}>
-          <Text style={{color:Colors.PRIMARY,fontSize:16}}>Settings</Text>
-        </TouchableOpacity>
+        <TouchableOpacity style={{ zIndex: 1 }} onPress={() => navigation.goBack()}>
+  <Text style={{ color: Colors.PRIMARY, fontSize: 18 }}>Settings</Text>
+</TouchableOpacity>
+
 
         <Text style={styles.editProfileText}>Account</Text>
       </View>
@@ -58,20 +59,23 @@ export default function AccountScreeen() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#F5F5F5',
     flex: 1,
-    backgroundColor: Colors.BackgroundGray,
   },
-  header: {
+ header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    marginTop: 30,
-    position: 'relative',
-    backgroundColor:'white'
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: '#FFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#DDD',
+    paddingTop: 40,
+
+
   },
   backArrow: {
-    zIndex: 1, // Ensure this is on top
+    zIndex: 1,
   },
   settingsText: {
     fontSize: 18,
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
     marginLeft: 1,
   },
   editProfileText: {
-    fontSize: 20,
+    fontSize: 25,
     color: Colors.Black,
     position: 'absolute',
     fontWeight:'bold',
@@ -149,7 +153,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   messageText: {
-    fontSize: 16,
+    fontSize: 18,
 marginRight:'auto',
 
   },

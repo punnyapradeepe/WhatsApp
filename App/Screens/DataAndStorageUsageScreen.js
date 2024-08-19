@@ -10,8 +10,7 @@ const DataAndStorageUsageScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={()=> navigation.goBack()}>
-         
+        <TouchableOpacity onPress={()=> navigation.goBack()} style={{marginTop:8}}>
           <LeftBackArrow />                                                                                                                                                                                                                                                                                                                                                   
      </TouchableOpacity>
      
@@ -92,6 +91,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#DDD',
     paddingTop: 40,
     justifyContent: 'space-between', 
+    paddingBottom:30
   },
 
   leftContainer: {
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize:17
   },
   titleText: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     color: '#000',
     position: 'absolute',
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.Gray,
     backgroundColor: 'white',
     paddingHorizontal: 15,
+    paddingVertical:15
   },
   optionText: {
     fontSize: 18,
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
     marginRight:10
   },
   noteText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#8E8E93',
     marginTop: 10,
     paddingHorizontal: 15,

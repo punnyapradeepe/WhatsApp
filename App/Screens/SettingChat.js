@@ -15,7 +15,7 @@ export default function SettingChat() {
           <LeftBackArrow style={styles.backArrow} />
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>navigation.goBack()}>
-          <Text style={{color:Colors.PRIMARY,fontSize:16}}>Settings</Text>
+          <Text style={{color:Colors.PRIMARY,fontSize:18}}>Settings</Text>
         </TouchableOpacity>
         <Text style={styles.editProfileText}>Chats</Text>
       </View>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   editProfileText: {
-    fontSize: 20,
+    fontSize: 25,
     color: Colors.Black,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.Gray,
   },
   StatusText: {
-    fontSize: 16,
+    fontSize: 18,
     flex: 1, 
   },
   infoText: {
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   messageText: {
-    fontSize: 16,
+    fontSize: 18,
     marginRight: 'auto',
     color: 'red',
   },
