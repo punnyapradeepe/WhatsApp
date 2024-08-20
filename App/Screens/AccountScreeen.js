@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     left: 0,
     right: 0,
+    top:35,
     textAlign: 'center',
     zIndex: 0, 
   },

@@ -197,6 +197,7 @@ export default function CallScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#EFEFF4',
   },
   header: {
     flexDirection: 'row',

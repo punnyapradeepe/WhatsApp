@@ -96,7 +96,7 @@ const CallScreenStack = () => (
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: 'white',
+    backgroundColor: '#EFEFF4',
     borderTopWidth: 0,
     elevation: 0,
     shadowOpacity: 0,
