@@ -10,7 +10,7 @@ const DataAndStorageUsageScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={()=> navigation.goBack()} style={{marginTop:8}}>
+        <TouchableOpacity onPress={()=> navigation.navigate('Settings')} style={{marginTop:8}}>
           <LeftBackArrow />                                                                                                                                                                                                                                                                                                                                                   
      </TouchableOpacity>
      

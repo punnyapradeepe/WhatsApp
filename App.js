@@ -33,6 +33,7 @@ export default function App() {
         <Stack.Screen name="notification" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="data" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="calleditcomp" component={CallEditComp} options={{ headerShown: false }} />
+        <Stack.Screen name="Settings" component={TabNavigation} options={{ headerShown: false }} />
 
 
       </Stack.Navigator>
