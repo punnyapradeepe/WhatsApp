@@ -8,7 +8,6 @@ const countries = [
   { name: 'United States', code: '+1' },
   { name: 'India', code: '+91' },
 ];
-
 export default function LoginScreen() {
   const navigation = useNavigation();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
